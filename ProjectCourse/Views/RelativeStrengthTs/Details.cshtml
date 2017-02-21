@@ -1,0 +1,50 @@
+﻿@model ProjectCourse.Models.RelativeStrengthT
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RelativeStrengthT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RelativeStrengthValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelativeStrengthValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelativeStrengthPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelativeStrengthPoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workout.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workout.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RelativeStrengthID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

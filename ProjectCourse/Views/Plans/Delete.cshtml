@@ -1,0 +1,56 @@
+﻿@model ProjectCourse.Models.Plan
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Plan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Microcycle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Microcycle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkoutTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkoutTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EWPUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EWPUser.FirstName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

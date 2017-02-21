@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - EWP</title>
+    @using Microsoft.AspNet.Identity
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("EWP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        HttpContext httpContext = HttpContext.Current;
+                        object id = User.Identity.GetUserId();
+                        <li>
+                            @Html.ActionLink("UserInfo", "../UserInfo/Edit", new { id = User.Identity.GetUserId() })
+                        </li>
+                        if (!User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                            <li class="collapse-hidden">
+                                <ul class="nav navbar-nav collapse-hidden">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Body<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Muscle", "Index", "Muscles")</li>
+                                            <li>@Html.ActionLink("Bone", "Index", "Bones")</li>
+                                            <li>@Html.ActionLink("Joint", "Index", "Joints")</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="collapse-hidden">
+                                <ul class="nav navbar-nav collapse-hidden">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Workout<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Workout", "Index", "Workouts")</li>
+                                            <li>@Html.ActionLink("Sport", "Index", "Sports")</li>
+                                            <li>@Html.ActionLink("Workout Muscles", "Index", "WorkoutMuscles")</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - EWP</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

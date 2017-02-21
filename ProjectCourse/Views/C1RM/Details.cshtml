@@ -1,0 +1,43 @@
+﻿@model ProjectCourse.Models.C1RM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>C1RM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RMDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RMDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EWPUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EWPUser.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RMID }) |
+    @Html.ActionLink("1RM Workouts List", "../C1RMWorkout") |
+    @Html.ActionLink("Back to List", "Index")
+</p>

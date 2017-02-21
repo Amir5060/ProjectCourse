@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb94f54951a04f2393d0796e050f7b24" Name="Diagram1">
+        <EntityTypeShape EntityType="EWPModel.C1RM" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.C1RMWorkout" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Bone" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.EWPUser" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Injury" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Joint" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Muscle" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Plan" Width="1.5" PointX="6.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Sport" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.sysdiagram" Width="1.5" PointX="8.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.Workout" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.WorkoutMuscle" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EWPModel.WorkoutPlan" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EWPModel.FK_1RM_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_1RMWorkout_1RM" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_1RMWorkout_Workout" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_Injury_Bone" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_Injury_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_Plan_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_User_Sport" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_Injury_Joint" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_Injury_Muscle" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_WorkoutMuscle_Muscle" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_WorkoutPlan_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_WorkoutMuscle_Workout" ManuallyRouted="false" />
+        <AssociationConnector Association="EWPModel.FK_WorkoutPlan_Workout" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

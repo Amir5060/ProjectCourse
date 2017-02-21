@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCourse", "ProjectCourse\ProjectCourse.csproj", "{8CA04485-A8C4-4A8E-B372-8E3DC0A9DE4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCourse.Tests", "ProjectCourse.Tests\ProjectCourse.Tests.csproj", "{738D469F-459E-4660-9BA0-C7DEC066BB4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA04485-A8C4-4A8E-B372-8E3DC0A9DE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA04485-A8C4-4A8E-B372-8E3DC0A9DE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA04485-A8C4-4A8E-B372-8E3DC0A9DE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA04485-A8C4-4A8E-B372-8E3DC0A9DE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738D469F-459E-4660-9BA0-C7DEC066BB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738D469F-459E-4660-9BA0-C7DEC066BB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738D469F-459E-4660-9BA0-C7DEC066BB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738D469F-459E-4660-9BA0-C7DEC066BB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://anotherprojects.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ProjectCourse.Tests\\ProjectCourse.Tests.csproj
+		SccProjectName1 = ProjectCourse.Tests
+		SccLocalPath1 = ProjectCourse.Tests
+		SccProjectUniqueName2 = ProjectCourse\\ProjectCourse.csproj
+		SccProjectName2 = ProjectCourse
+		SccLocalPath2 = ProjectCourse
+	EndGlobalSection
+EndGlobal

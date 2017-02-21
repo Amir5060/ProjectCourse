@@ -1,0 +1,72 @@
+﻿@model ProjectCourse.Models.WorkoutPlan
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WorkoutPlan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Repetition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkoutPlanSet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkoutPlanSet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkoutPlanWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkoutPlanWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plan.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plan.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workout.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workout.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

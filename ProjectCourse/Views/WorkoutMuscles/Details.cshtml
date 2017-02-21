@@ -1,0 +1,66 @@
+﻿@model ProjectCourse.Models.WorkoutMuscle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkoutMuscle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimMover)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimMover)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Synergist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Synergist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stabilizer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stabilizer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lengthening)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lengthening)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workout.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workout.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Muscle.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Muscle.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkoutMuscleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ProjectCourse.Models.C1RMWorkout>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("My plan's workouts", "WorkoutPlan")
+    
+</p>
+<div style="color: @Html.Raw(ViewBag.Color);">@Html.Raw(ViewBag.Message)</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Workout.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkoutWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RMWorkoutDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Workout1RM)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Workout.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkoutWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repetition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RMWorkoutDate)
+        </td>   
+        <td>
+            @Html.DisplayFor(modelItem => item.Workout1RM)
+        </td>     
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RMWorkoutID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RMWorkoutID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RMWorkoutID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,987 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EWPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="1RM">
+          <Key>
+            <PropertyRef Name="RMID" />
+          </Key>
+          <Property Name="RMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserWeight" Type="int" Nullable="false" />
+          <Property Name="RMDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="1RMWorkout">
+          <Key>
+            <PropertyRef Name="RMWorkoutID" />
+          </Key>
+          <Property Name="RMWorkoutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RMID" Type="int" Nullable="false" />
+          <Property Name="WorkoutID" Type="int" Nullable="false" />
+          <Property Name="WorkoutWeight" Type="int" />
+          <Property Name="Repetition" Type="int" />
+          <Property Name="RMWorkoutDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Bone">
+          <Key>
+            <PropertyRef Name="BoneID" />
+          </Key>
+          <Property Name="BoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EWPUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Username" Type="nvarchar" MaxLength="500" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="SportID" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EmailConfirmation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Injury">
+          <Key>
+            <PropertyRef Name="InjuryID" />
+          </Key>
+          <Property Name="InjuryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MuscleID" Type="int" />
+          <Property Name="JointID" Type="int" />
+          <Property Name="InjuryDescription" Type="text" />
+          <Property Name="BoneID" Type="int" />
+        </EntityType>
+        <EntityType Name="Joint">
+          <Key>
+            <PropertyRef Name="JointID" />
+          </Key>
+          <Property Name="JointID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Muscle">
+          <Key>
+            <PropertyRef Name="MuscleID" />
+          </Key>
+          <Property Name="MuscleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Microcycle" Type="int" />
+          <Property Name="WorkoutTime" Type="int" />
+          <Property Name="PlanDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportID" />
+          </Key>
+          <Property Name="SportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SportName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SportType" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Workout">
+          <Key>
+            <PropertyRef Name="WorkoutID" />
+          </Key>
+          <Property Name="WorkoutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Difficulty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkoutMuscle">
+          <Key>
+            <PropertyRef Name="WorkoutMuscleID" />
+          </Key>
+          <Property Name="WorkoutMuscleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkoutID" Type="int" Nullable="false" />
+          <Property Name="MuscleID" Type="int" Nullable="false" />
+          <Property Name="PrimMover" Type="bit" Nullable="false" />
+          <Property Name="Synergist" Type="bit" Nullable="false" />
+          <Property Name="Stabilizer" Type="bit" Nullable="false" />
+          <Property Name="Lengthening" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkoutPlan">
+          <Key>
+            <PropertyRef Name="WorkoutPlanID" />
+          </Key>
+          <Property Name="WorkoutPlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkoutID" Type="int" Nullable="false" />
+          <Property Name="PlanID" Type="int" Nullable="false" />
+          <Property Name="Repetition" Type="int" Nullable="false" />
+          <Property Name="WorkoutPlanSet" Type="int" Nullable="false" />
+          <Property Name="Rest" Type="int" Nullable="false" />
+          <Property Name="WorkoutPlanWeight" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_1RM_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="1RM" Type="Self.1RM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="1RM">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_1RM">
+          <End Role="1RM" Type="Self.1RM" Multiplicity="1" />
+          <End Role="1RMWorkout" Type="Self.1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="1RM">
+              <PropertyRef Name="RMID" />
+            </Principal>
+            <Dependent Role="1RMWorkout">
+              <PropertyRef Name="RMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="1RMWorkout" Type="Self.1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="1RMWorkout">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Bone">
+          <End Role="Bone" Type="Self.Bone" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bone">
+              <PropertyRef Name="BoneID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="BoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Joint">
+          <End Role="Joint" Type="Self.Joint" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Joint">
+              <PropertyRef Name="JointID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="JointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Muscle">
+          <End Role="Muscle" Type="Self.Muscle" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muscle">
+              <PropertyRef Name="MuscleID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="MuscleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plan_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="Plan" Type="Self.Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Sport">
+          <End Role="Sport" Type="Self.Sport" Multiplicity="0..1" />
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="SportID" />
+            </Principal>
+            <Dependent Role="EWPUser">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutMuscle_Muscle">
+          <End Role="Muscle" Type="Self.Muscle" Multiplicity="1" />
+          <End Role="WorkoutMuscle" Type="Self.WorkoutMuscle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muscle">
+              <PropertyRef Name="MuscleID" />
+            </Principal>
+            <Dependent Role="WorkoutMuscle">
+              <PropertyRef Name="MuscleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutMuscle_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="WorkoutMuscle" Type="Self.WorkoutMuscle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="WorkoutMuscle">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutPlan_Plan">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="WorkoutPlan" Type="Self.WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutPlan_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="WorkoutPlan" Type="Self.WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAllSports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUserByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <EntityContainer Name="EWPModelStoreContainer">
+          <EntitySet Name="1RM" EntityType="Self.1RM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="1RMWorkout" EntityType="Self.1RMWorkout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bone" EntityType="Self.Bone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EWPUser" EntityType="Self.EWPUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Injury" EntityType="Self.Injury" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Joint" EntityType="Self.Joint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muscle" EntityType="Self.Muscle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sport" EntityType="Self.Sport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workout" EntityType="Self.Workout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutMuscle" EntityType="Self.WorkoutMuscle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutPlan" EntityType="Self.WorkoutPlan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_1RM_User" Association="Self.FK_1RM_User">
+            <End Role="EWPUser" EntitySet="EWPUser" />
+            <End Role="1RM" EntitySet="1RM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_1RM" Association="Self.FK_1RMWorkout_1RM">
+            <End Role="1RM" EntitySet="1RM" />
+            <End Role="1RMWorkout" EntitySet="1RMWorkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_Workout" Association="Self.FK_1RMWorkout_Workout">
+            <End Role="Workout" EntitySet="Workout" />
+            <End Role="1RMWorkout" EntitySet="1RMWorkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Bone" Association="Self.FK_Injury_Bone">
+            <End Role="Bone" EntitySet="Bone" />
+            <End Role="Injury" EntitySet="Injury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Joint" Association="Self.FK_Injury_Joint">
+            <End Role="Joint" EntitySet="Joint" />
+            <End Role="Injury" EntitySet="Injury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Muscle" Association="Self.FK_Injury_Muscle">
+            <End Role="Muscle" EntitySet="Muscle" />
+            <End Role="Injury" EntitySet="Injury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_User" Association="Self.FK_Injury_User">
+            <End Role="EWPUser" EntitySet="EWPUser" />
+            <End Role="Injury" EntitySet="Injury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_User" Association="Self.FK_Plan_User">
+            <End Role="EWPUser" EntitySet="EWPUser" />
+            <End Role="Plan" EntitySet="Plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Sport" Association="Self.FK_User_Sport">
+            <End Role="Sport" EntitySet="Sport" />
+            <End Role="EWPUser" EntitySet="EWPUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutMuscle_Muscle" Association="Self.FK_WorkoutMuscle_Muscle">
+            <End Role="Muscle" EntitySet="Muscle" />
+            <End Role="WorkoutMuscle" EntitySet="WorkoutMuscle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutMuscle_Workout" Association="Self.FK_WorkoutMuscle_Workout">
+            <End Role="Workout" EntitySet="Workout" />
+            <End Role="WorkoutMuscle" EntitySet="WorkoutMuscle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutPlan_Plan" Association="Self.FK_WorkoutPlan_Plan">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutPlan_Workout" Association="Self.FK_WorkoutPlan_Workout">
+            <End Role="Workout" EntitySet="Workout" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EWPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C1RM">
+          <Key>
+            <PropertyRef Name="RMID" />
+          </Key>
+          <Property Name="RMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="UserWeight" Type="Int32" Nullable="false" />
+          <Property Name="RMDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="EWPUser" Relationship="Self.FK_1RM_User" FromRole="C1RM" ToRole="EWPUser" />
+          <NavigationProperty Name="C1RMWorkout" Relationship="Self.FK_1RMWorkout_1RM" FromRole="C1RM" ToRole="C1RMWorkout" />
+        </EntityType>
+        <EntityType Name="C1RMWorkout">
+          <Key>
+            <PropertyRef Name="RMWorkoutID" />
+          </Key>
+          <Property Name="RMWorkoutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RMID" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutID" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutWeight" Type="Int32" />
+          <Property Name="Repetition" Type="Int32" />
+          <Property Name="RMWorkoutDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="C1RM" Relationship="Self.FK_1RMWorkout_1RM" FromRole="C1RMWorkout" ToRole="C1RM" />
+          <NavigationProperty Name="Workout" Relationship="Self.FK_1RMWorkout_Workout" FromRole="C1RMWorkout" ToRole="Workout" />
+        </EntityType>
+        <EntityType Name="Bone">
+          <Key>
+            <PropertyRef Name="BoneID" />
+          </Key>
+          <Property Name="BoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Injuries" Relationship="Self.FK_Injury_Bone" FromRole="Bone" ToRole="Injury" />
+        </EntityType>
+        <EntityType Name="EWPUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="SportID" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="C1RM" Relationship="Self.FK_1RM_User" FromRole="EWPUser" ToRole="C1RM" />
+          <NavigationProperty Name="Injuries" Relationship="Self.FK_Injury_User" FromRole="EWPUser" ToRole="Injury" />
+          <NavigationProperty Name="Plans" Relationship="Self.FK_Plan_User" FromRole="EWPUser" ToRole="Plan" />
+          <NavigationProperty Name="Sport" Relationship="Self.FK_User_Sport" FromRole="EWPUser" ToRole="Sport" />
+        </EntityType>
+        <EntityType Name="Injury">
+          <Key>
+            <PropertyRef Name="InjuryID" />
+          </Key>
+          <Property Name="InjuryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="MuscleID" Type="Int32" />
+          <Property Name="JointID" Type="Int32" />
+          <Property Name="InjuryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BoneID" Type="Int32" />
+          <NavigationProperty Name="Bone" Relationship="Self.FK_Injury_Bone" FromRole="Injury" ToRole="Bone" />
+          <NavigationProperty Name="EWPUser" Relationship="Self.FK_Injury_User" FromRole="Injury" ToRole="EWPUser" />
+          <NavigationProperty Name="Joint" Relationship="Self.FK_Injury_Joint" FromRole="Injury" ToRole="Joint" />
+          <NavigationProperty Name="Muscle" Relationship="Self.FK_Injury_Muscle" FromRole="Injury" ToRole="Muscle" />
+        </EntityType>
+        <EntityType Name="Joint">
+          <Key>
+            <PropertyRef Name="JointID" />
+          </Key>
+          <Property Name="JointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Injuries" Relationship="Self.FK_Injury_Joint" FromRole="Joint" ToRole="Injury" />
+        </EntityType>
+        <EntityType Name="Muscle">
+          <Key>
+            <PropertyRef Name="MuscleID" />
+          </Key>
+          <Property Name="MuscleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Injuries" Relationship="Self.FK_Injury_Muscle" FromRole="Muscle" ToRole="Injury" />
+          <NavigationProperty Name="WorkoutMuscles" Relationship="Self.FK_WorkoutMuscle_Muscle" FromRole="Muscle" ToRole="WorkoutMuscle" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="Microcycle" Type="Int32" />
+          <Property Name="WorkoutTime" Type="Int32" />
+          <Property Name="PlanDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="EWPUser" Relationship="Self.FK_Plan_User" FromRole="Plan" ToRole="EWPUser" />
+          <NavigationProperty Name="WorkoutPlans" Relationship="Self.FK_WorkoutPlan_Plan" FromRole="Plan" ToRole="WorkoutPlan" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportID" />
+          </Key>
+          <Property Name="SportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SportName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SportType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EWPUsers" Relationship="Self.FK_User_Sport" FromRole="Sport" ToRole="EWPUser" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Workout">
+          <Key>
+            <PropertyRef Name="WorkoutID" />
+          </Key>
+          <Property Name="WorkoutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Difficulty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="C1RMWorkout" Relationship="Self.FK_1RMWorkout_Workout" FromRole="Workout" ToRole="C1RMWorkout" />
+          <NavigationProperty Name="WorkoutMuscles" Relationship="Self.FK_WorkoutMuscle_Workout" FromRole="Workout" ToRole="WorkoutMuscle" />
+          <NavigationProperty Name="WorkoutPlans" Relationship="Self.FK_WorkoutPlan_Workout" FromRole="Workout" ToRole="WorkoutPlan" />
+        </EntityType>
+        <EntityType Name="WorkoutMuscle">
+          <Key>
+            <PropertyRef Name="WorkoutMuscleID" />
+          </Key>
+          <Property Name="WorkoutMuscleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkoutID" Type="Int32" Nullable="false" />
+          <Property Name="MuscleID" Type="Int32" Nullable="false" />
+          <Property Name="PrimMover" Type="Boolean" Nullable="false" />
+          <Property Name="Synergist" Type="Boolean" Nullable="false" />
+          <Property Name="Stabilizer" Type="Boolean" Nullable="false" />
+          <Property Name="Lengthening" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Muscle" Relationship="Self.FK_WorkoutMuscle_Muscle" FromRole="WorkoutMuscle" ToRole="Muscle" />
+          <NavigationProperty Name="Workout" Relationship="Self.FK_WorkoutMuscle_Workout" FromRole="WorkoutMuscle" ToRole="Workout" />
+        </EntityType>
+        <EntityType Name="WorkoutPlan">
+          <Key>
+            <PropertyRef Name="WorkoutPlanID" />
+          </Key>
+          <Property Name="WorkoutPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkoutID" Type="Int32" Nullable="false" />
+          <Property Name="PlanID" Type="Int32" Nullable="false" />
+          <Property Name="Repetition" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutPlanSet" Type="Int32" Nullable="false" />
+          <Property Name="Rest" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutPlanWeight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plan" Relationship="Self.FK_WorkoutPlan_Plan" FromRole="WorkoutPlan" ToRole="Plan" />
+          <NavigationProperty Name="Workout" Relationship="Self.FK_WorkoutPlan_Workout" FromRole="WorkoutPlan" ToRole="Workout" />
+        </EntityType>
+        <Association Name="FK_1RM_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="C1RM" Type="Self.C1RM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="C1RM">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_1RM">
+          <End Role="C1RM" Type="Self.C1RM" Multiplicity="1" />
+          <End Role="C1RMWorkout" Type="Self.C1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C1RM">
+              <PropertyRef Name="RMID" />
+            </Principal>
+            <Dependent Role="C1RMWorkout">
+              <PropertyRef Name="RMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="C1RMWorkout" Type="Self.C1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="C1RMWorkout">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Bone">
+          <End Role="Bone" Type="Self.Bone" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bone">
+              <PropertyRef Name="BoneID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="BoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plan_User">
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
+          <End Role="Plan" Type="Self.Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EWPUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Sport">
+          <End Role="Sport" Type="Self.Sport" Multiplicity="0..1" />
+          <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="SportID" />
+            </Principal>
+            <Dependent Role="EWPUser">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Joint">
+          <End Role="Joint" Type="Self.Joint" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Joint">
+              <PropertyRef Name="JointID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="JointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Injury_Muscle">
+          <End Role="Muscle" Type="Self.Muscle" Multiplicity="0..1" />
+          <End Role="Injury" Type="Self.Injury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muscle">
+              <PropertyRef Name="MuscleID" />
+            </Principal>
+            <Dependent Role="Injury">
+              <PropertyRef Name="MuscleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutMuscle_Muscle">
+          <End Role="Muscle" Type="Self.Muscle" Multiplicity="1" />
+          <End Role="WorkoutMuscle" Type="Self.WorkoutMuscle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muscle">
+              <PropertyRef Name="MuscleID" />
+            </Principal>
+            <Dependent Role="WorkoutMuscle">
+              <PropertyRef Name="MuscleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutPlan_Plan">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="WorkoutPlan" Type="Self.WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutMuscle_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="WorkoutMuscle" Type="Self.WorkoutMuscle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="WorkoutMuscle">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutPlan_Workout">
+          <End Role="Workout" Type="Self.Workout" Multiplicity="1" />
+          <End Role="WorkoutPlan" Type="Self.WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EWPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C1RM" EntityType="Self.C1RM" />
+          <EntitySet Name="C1RMWorkout" EntityType="Self.C1RMWorkout" />
+          <EntitySet Name="Bones" EntityType="Self.Bone" />
+          <EntitySet Name="EWPUsers" EntityType="Self.EWPUser" />
+          <EntitySet Name="Injuries" EntityType="Self.Injury" />
+          <EntitySet Name="Joints" EntityType="Self.Joint" />
+          <EntitySet Name="Muscles" EntityType="Self.Muscle" />
+          <EntitySet Name="Plans" EntityType="Self.Plan" />
+          <EntitySet Name="Sports" EntityType="Self.Sport" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Workouts" EntityType="Self.Workout" />
+          <EntitySet Name="WorkoutMuscles" EntityType="Self.WorkoutMuscle" />
+          <EntitySet Name="WorkoutPlans" EntityType="Self.WorkoutPlan" />
+          <AssociationSet Name="FK_1RM_User" Association="Self.FK_1RM_User">
+            <End Role="EWPUser" EntitySet="EWPUsers" />
+            <End Role="C1RM" EntitySet="C1RM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_1RM" Association="Self.FK_1RMWorkout_1RM">
+            <End Role="C1RM" EntitySet="C1RM" />
+            <End Role="C1RMWorkout" EntitySet="C1RMWorkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_Workout" Association="Self.FK_1RMWorkout_Workout">
+            <End Role="Workout" EntitySet="Workouts" />
+            <End Role="C1RMWorkout" EntitySet="C1RMWorkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Bone" Association="Self.FK_Injury_Bone">
+            <End Role="Bone" EntitySet="Bones" />
+            <End Role="Injury" EntitySet="Injuries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_User" Association="Self.FK_Injury_User">
+            <End Role="EWPUser" EntitySet="EWPUsers" />
+            <End Role="Injury" EntitySet="Injuries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_User" Association="Self.FK_Plan_User">
+            <End Role="EWPUser" EntitySet="EWPUsers" />
+            <End Role="Plan" EntitySet="Plans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Sport" Association="Self.FK_User_Sport">
+            <End Role="Sport" EntitySet="Sports" />
+            <End Role="EWPUser" EntitySet="EWPUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Joint" Association="Self.FK_Injury_Joint">
+            <End Role="Joint" EntitySet="Joints" />
+            <End Role="Injury" EntitySet="Injuries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Injury_Muscle" Association="Self.FK_Injury_Muscle">
+            <End Role="Muscle" EntitySet="Muscles" />
+            <End Role="Injury" EntitySet="Injuries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutMuscle_Muscle" Association="Self.FK_WorkoutMuscle_Muscle">
+            <End Role="Muscle" EntitySet="Muscles" />
+            <End Role="WorkoutMuscle" EntitySet="WorkoutMuscles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutPlan_Plan" Association="Self.FK_WorkoutPlan_Plan">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutMuscle_Workout" Association="Self.FK_WorkoutMuscle_Workout">
+            <End Role="Workout" EntitySet="Workouts" />
+            <End Role="WorkoutMuscle" EntitySet="WorkoutMuscles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutPlan_Workout" Association="Self.FK_WorkoutPlan_Workout">
+            <End Role="Workout" EntitySet="Workouts" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllSports" ReturnType="Collection(EWPModel.GetAllSports_Result)" />
+          <FunctionImport Name="GetUserByUserID" ReturnType="Collection(EWPModel.GetUserByUserID_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Guid" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllSports_Result">
+          <Property Type="Int32" Name="SportID" Nullable="false" />
+          <Property Type="String" Name="SportName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="SportType" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetUserByUserID_Result">
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Height" Nullable="true" />
+          <Property Type="Int32" Name="Experience" Nullable="true" />
+          <Property Type="Int32" Name="SportID" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" />
+          <Property Type="Boolean" Name="EmailConfirmation" Nullable="false" />
+          <Property Type="String" Name="SportName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SportType" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="InjuryID" Nullable="true" />
+          <Property Type="Int32" Name="MuscleID" Nullable="true" />
+          <Property Type="Int32" Name="JointID" Nullable="true" />
+          <Property Type="String" Name="InjuryDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="BoneID" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EWPModelStoreContainer" CdmEntityContainer="EWPEntities">
+          <EntitySetMapping Name="C1RM">
+            <EntityTypeMapping TypeName="EWPModel.C1RM">
+              <MappingFragment StoreEntitySet="1RM">
+                <ScalarProperty Name="RMID" ColumnName="RMID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserWeight" ColumnName="UserWeight" />
+                <ScalarProperty Name="RMDate" ColumnName="RMDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C1RMWorkout">
+            <EntityTypeMapping TypeName="EWPModel.C1RMWorkout">
+              <MappingFragment StoreEntitySet="1RMWorkout">
+                <ScalarProperty Name="RMWorkoutID" ColumnName="RMWorkoutID" />
+                <ScalarProperty Name="RMID" ColumnName="RMID" />
+                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
+                <ScalarProperty Name="WorkoutWeight" ColumnName="WorkoutWeight" />
+                <ScalarProperty Name="Repetition" ColumnName="Repetition" />
+                <ScalarProperty Name="RMWorkoutDate" ColumnName="RMWorkoutDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bones">
+            <EntityTypeMapping TypeName="EWPModel.Bone">
+              <MappingFragment StoreEntitySet="Bone">
+                <ScalarProperty Name="BoneID" ColumnName="BoneID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EWPUsers">
+            <EntityTypeMapping TypeName="EWPModel.EWPUser">
+              <MappingFragment StoreEntitySet="EWPUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailConfirmation" ColumnName="EmailConfirmation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Injuries">
+            <EntityTypeMapping TypeName="EWPModel.Injury">
+              <MappingFragment StoreEntitySet="Injury">
+                <ScalarProperty Name="InjuryID" ColumnName="InjuryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MuscleID" ColumnName="MuscleID" />
+                <ScalarProperty Name="JointID" ColumnName="JointID" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="BoneID" ColumnName="BoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Joints">
+            <EntityTypeMapping TypeName="EWPModel.Joint">
+              <MappingFragment StoreEntitySet="Joint">
+                <ScalarProperty Name="JointID" ColumnName="JointID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Muscles">
+            <EntityTypeMapping TypeName="EWPModel.Muscle">
+              <MappingFragment StoreEntitySet="Muscle">
+                <ScalarProperty Name="MuscleID" ColumnName="MuscleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plans">
+            <EntityTypeMapping TypeName="EWPModel.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Microcycle" ColumnName="Microcycle" />
+                <ScalarProperty Name="WorkoutTime" ColumnName="WorkoutTime" />
+                <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sports">
+            <EntityTypeMapping TypeName="EWPModel.Sport">
+              <MappingFragment StoreEntitySet="Sport">
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="SportName" ColumnName="SportName" />
+                <ScalarProperty Name="SportType" ColumnName="SportType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EWPModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workouts">
+            <EntityTypeMapping TypeName="EWPModel.Workout">
+              <MappingFragment StoreEntitySet="Workout">
+                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Difficulty" ColumnName="Difficulty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutMuscles">
+            <EntityTypeMapping TypeName="EWPModel.WorkoutMuscle">
+              <MappingFragment StoreEntitySet="WorkoutMuscle">
+                <ScalarProperty Name="WorkoutMuscleID" ColumnName="WorkoutMuscleID" />
+                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
+                <ScalarProperty Name="MuscleID" ColumnName="MuscleID" />
+                <ScalarProperty Name="PrimMover" ColumnName="PrimMover" />
+                <ScalarProperty Name="Synergist" ColumnName="Synergist" />
+                <ScalarProperty Name="Stabilizer" ColumnName="Stabilizer" />
+                <ScalarProperty Name="Lengthening" ColumnName="Lengthening" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutPlans">
+            <EntityTypeMapping TypeName="EWPModel.WorkoutPlan">
+              <MappingFragment StoreEntitySet="WorkoutPlan">
+                <ScalarProperty Name="WorkoutPlanID" ColumnName="WorkoutPlanID" />
+                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="Repetition" ColumnName="Repetition" />
+                <ScalarProperty Name="WorkoutPlanSet" ColumnName="WorkoutPlanSet" />
+                <ScalarProperty Name="Rest" ColumnName="Rest" />
+                <ScalarProperty Name="WorkoutPlanWeight" ColumnName="WorkoutPlanWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSports" FunctionName="EWPModel.Store.GetAllSports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EWPModel.GetAllSports_Result">
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="SportName" ColumnName="SportName" />
+                <ScalarProperty Name="SportType" ColumnName="SportType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserByUserID" FunctionName="EWPModel.Store.GetUserByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EWPModel.GetUserByUserID_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailConfirmation" ColumnName="EmailConfirmation" />
+                <ScalarProperty Name="SportName" ColumnName="SportName" />
+                <ScalarProperty Name="SportType" ColumnName="SportType" />
+                <ScalarProperty Name="InjuryID" ColumnName="InjuryID" />
+                <ScalarProperty Name="MuscleID" ColumnName="MuscleID" />
+                <ScalarProperty Name="JointID" ColumnName="JointID" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="BoneID" ColumnName="BoneID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

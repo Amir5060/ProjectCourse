@@ -1,0 +1,51 @@
+﻿@model ProjectCourse.Models.Plan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Plan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Microcycle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Microcycle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkoutTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkoutTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EWPUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EWPUser.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlanID }) |
+    @Html.ActionLink("Suggested Workouts", "../WorkoutPlans") |
+    @Html.ActionLink("Back to List", "Index")
+</p>

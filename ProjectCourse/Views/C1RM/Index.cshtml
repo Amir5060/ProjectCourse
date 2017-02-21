@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectCourse.Models.C1RM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RMDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RMDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RMID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RMID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RMID })
+        </td>
+    </tr>
+}
+
+</table>
