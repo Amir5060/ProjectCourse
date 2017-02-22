@@ -210,6 +210,7 @@
     <Compile Include="Controllers\C1RMController.cs" />
     <Compile Include="Controllers\C1RMWorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InjuriesController.cs" />
     <Compile Include="Controllers\JointsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MusclesController.cs" />
@@ -437,6 +438,12 @@
     <Content Include="Views\RelativeStrengthTs\Details.cshtml" />
     <Content Include="Views\RelativeStrengthTs\Edit.cshtml" />
     <Content Include="Views\RelativeStrengthTs\Index.cshtml" />
+    <Content Include="workflow.json" />
+    <Content Include="Views\Injuries\Create.cshtml" />
+    <Content Include="Views\Injuries\Delete.cshtml" />
+    <Content Include="Views\Injuries\Details.cshtml" />
+    <Content Include="Views\Injuries\Edit.cshtml" />
+    <Content Include="Views\Injuries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

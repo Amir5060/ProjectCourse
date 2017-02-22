@@ -28,7 +28,7 @@ namespace ProjectCourse.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
+            { 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Plan plan = db.Plans.Find(id);

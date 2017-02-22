@@ -35,6 +35,7 @@
                         if (!User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+                            <li>@Html.ActionLink("Injuries", "Index", "Injuries")</li>
                         }
                         if (User.IsInRole("Admin"))
                         {
