@@ -19,7 +19,8 @@ namespace ProjectCourse.Controllers
         // GET: Plans
         public ActionResult Index()
         {
-            var plans = db.Plans.Include(p => p.EWPUser);
+            var currentUserID = User.Identity.GetUserId(); 
+            var plans = db.Plans.Where(p => p.UserID == currentUserID); 
             return View(plans.ToList());
         }
 
