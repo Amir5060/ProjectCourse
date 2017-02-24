@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Web;
 
 namespace ProjectCourse.Models
@@ -72,6 +77,11 @@ namespace ProjectCourse.Models
                 }
                 else
                 {
+                    //JsonConvert.DeserializeObject()
+                    DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(JsonCycle));
+                    MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText("../../CycleFlow.json")));                    
+                    List<JsonCycle> contacts = (List<JsonCycle>)js.ReadObject(stream);
+
                     var vCompareWorkout = CompareWorkouts(userId);
                     WorkoutPlan newWorkout = new WorkoutPlan();
                     foreach (var item in vCompareWorkout)
@@ -285,5 +295,24 @@ namespace ProjectCourse.Models
         public int WorkoutPoint { get; set; }
         public int WorkoutId { get; set; }
 
+    }
+
+    [DataContract]
+    public class JsonCycle
+    {
+        [DataMember]
+        public string Title { get; set; }
+        [DataMember]
+        public string Description { get; set; }
+        [DataMember]
+        public string Sets { get; set; }
+        [DataMember]
+        public int Weight { get; set; }
+        [DataMember]
+        public string Rest { get; set; }
+        [DataMember]
+        public string Week { get; set; }
+        [DataMember]
+        public string Cycle { get; set; }
     }
 }
