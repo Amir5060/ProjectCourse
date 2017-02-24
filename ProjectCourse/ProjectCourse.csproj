@@ -352,6 +352,7 @@
     <Content Include="Models\ASPModel.edmx.diagram">
       <DependentUpon>ASPModel.edmx</DependentUpon>
     </Content>
+    <Content Include="CycleFlow.json" />
     <None Include="Properties\PublishProfiles\EWP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -116,22 +116,32 @@ namespace ProjectCourse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plan plan = db.Plans.Find(id);
-            if (plan == null)
+            var rmCount = db.C1RMWorkout.Where(x => x.RMPlanId == id).Count();
+            var planWokrout = db.WorkoutPlans.Where(x => x.PlanID == id).Count();
+            if ((rmCount + planWokrout) == 0)
             {
-                return HttpNotFound();
+                Plan plan = db.Plans.Find(id);
+                if (plan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(plan);
             }
-            return View(plan);
+            else
+            {
+                TempData["Message"] = "You can't delete this plan since this plan is already in progress.";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Plans/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
+        {            
             Plan plan = db.Plans.Find(id);
             db.Plans.Remove(plan);
-            db.SaveChanges();
+            db.SaveChanges();            
             return RedirectToAction("Index");
         }
 

@@ -1,0 +1,80 @@
+﻿{
+  "CyclesFlow": {
+    "C01": {
+      "Title": "First",
+      "Description": "Bones, and tandons",
+      "Sets": "2",
+      "Weight": 35,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "1"
+    },
+    "C02": {
+      "Title": "First",
+      "Description": "Bones, and tandons",
+      "Sets": "3",
+      "Weight": 40,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "2"
+    },
+    "C03": {
+      "Title": "Rest",
+      "Description": "Bones, and tandons",
+      "Sets": "2",
+      "Weight": 30,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "3"
+    },
+    "C04": {
+      "Title": "First",
+      "Description": "Bones, and tandons",
+      "Sets": "3",
+      "Weight": 45,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "4"
+    },
+    "C05": {
+      "Title": "First",
+      "Description": "Bones, and tandons",
+      "Sets": "3",
+      "Weight": 50,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "5"
+    },
+    "C06": {
+      "Title": "Rest",
+      "Description": "Bones, and tandons",
+      "Sets": "2",
+      "Weight": 40,
+      "Rest": "45-90 Sec",
+      "Week": "1",
+      "Cycle": "6"
+    }
+  },
+  "CycleSteps": [
+    {
+      "CycleName": "C01",
+      "NextCycle": "C02"
+    },
+    {
+      "CycleName": "C02",
+      "NextCycle": "C03"
+    },
+    {
+      "CycleName": "C03",
+      "NextCycle": "C04"
+    },
+    {
+      "CycleName": "C04",
+      "NextCycle": "C05"
+    },
+    {
+      "CycleName": "C05",
+      "NextCycle": "C06"
+    }
+  ]
+}
