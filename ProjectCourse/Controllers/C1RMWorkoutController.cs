@@ -164,7 +164,7 @@ namespace ProjectCourse.Controllers
 
         /// <summary>
         /// Description:
-        ///     Send the user to his workouts for this plan.
+        ///     Send the user his workouts for this plan.
         /// History:
         ///     Amir Naji   02/12/2016
         /// </summary>

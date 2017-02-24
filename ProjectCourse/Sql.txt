@@ -1,0 +1,156 @@
+﻿/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.[Plan] ADD
+	FinishDate date NULL
+GO
+ALTER TABLE dbo.[Plan] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.[1RMWorkout] ADD
+	RMPlanId int NULL
+GO
+ALTER TABLE dbo.[1RMWorkout] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.[Plan] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.[1RMWorkout]
+	DROP CONSTRAINT FK_1RMWorkout_1RMWorkout
+GO
+ALTER TABLE dbo.[1RMWorkout] ADD CONSTRAINT
+	FK_1RMWorkout_1RMWorkout FOREIGN KEY
+	(
+	RMPlanId
+	) REFERENCES dbo.[Plan]
+	(
+	PlanID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.[1RMWorkout] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.WorkoutPlan
+	DROP CONSTRAINT FK_WorkoutPlan_Plan
+GO
+ALTER TABLE dbo.[Plan] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.WorkoutPlan
+	DROP CONSTRAINT FK_WorkoutPlan_Workout
+GO
+ALTER TABLE dbo.Workout SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_WorkoutPlan
+	(
+	WorkoutPlanID int NOT NULL IDENTITY (1, 1),
+	WorkoutID int NOT NULL,
+	PlanID int NOT NULL,
+	Repetition int NOT NULL,
+	WorkoutPlanSet int NOT NULL,
+	Rest int NOT NULL,
+	WorkoutPlanWeight real NOT NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_WorkoutPlan SET (LOCK_ESCALATION = TABLE)
+GO
+SET IDENTITY_INSERT dbo.Tmp_WorkoutPlan ON
+GO
+IF EXISTS(SELECT * FROM dbo.WorkoutPlan)
+	 EXEC('INSERT INTO dbo.Tmp_WorkoutPlan (WorkoutPlanID, WorkoutID, PlanID, Repetition, WorkoutPlanSet, Rest, WorkoutPlanWeight)
+		SELECT WorkoutPlanID, WorkoutID, PlanID, Repetition, WorkoutPlanSet, Rest, CONVERT(real, WorkoutPlanWeight) FROM dbo.WorkoutPlan WITH (HOLDLOCK TABLOCKX)')
+GO
+SET IDENTITY_INSERT dbo.Tmp_WorkoutPlan OFF
+GO
+DROP TABLE dbo.WorkoutPlan
+GO
+EXECUTE sp_rename N'dbo.Tmp_WorkoutPlan', N'WorkoutPlan', 'OBJECT' 
+GO
+ALTER TABLE dbo.WorkoutPlan ADD CONSTRAINT
+	PK_WorkoutPlan PRIMARY KEY CLUSTERED 
+	(
+	WorkoutPlanID
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.WorkoutPlan ADD CONSTRAINT
+	FK_WorkoutPlan_Workout FOREIGN KEY
+	(
+	WorkoutID
+	) REFERENCES dbo.Workout
+	(
+	WorkoutID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.WorkoutPlan ADD CONSTRAINT
+	FK_WorkoutPlan_Plan FOREIGN KEY
+	(
+	PlanID
+	) REFERENCES dbo.[Plan]
+	(
+	PlanID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+COMMIT

@@ -18,9 +18,9 @@ namespace ProjectCourse.Models
         public Workout()
         {
             this.WorkoutMuscles = new HashSet<WorkoutMuscle>();
-            this.WorkoutPlans = new HashSet<WorkoutPlan>();
             this.RelativeStrengthTs = new HashSet<RelativeStrengthT>();
             this.C1RMWorkout = new HashSet<C1RMWorkout>();
+            this.WorkoutPlans = new HashSet<WorkoutPlan>();
         }
     
         public int WorkoutID { get; set; }
@@ -30,10 +30,10 @@ namespace ProjectCourse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkoutMuscle> WorkoutMuscles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RelativeStrengthT> RelativeStrengthTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1RMWorkout> C1RMWorkout { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
     }
 }

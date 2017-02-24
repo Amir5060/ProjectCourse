@@ -21,8 +21,10 @@ namespace ProjectCourse.Models
         public Nullable<int> Repetition { get; set; }
         public Nullable<System.DateTime> RMWorkoutDate { get; set; }
         public Nullable<float> Workout1RM { get; set; }
+        public Nullable<int> RMPlanId { get; set; }
     
         public virtual C1RM C1RM { get; set; }
         public virtual Workout Workout { get; set; }
+        public virtual Plan Plan { get; set; }
     }
 }

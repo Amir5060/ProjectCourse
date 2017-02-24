@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectCourse.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,6 +34,18 @@ namespace ProjectCourse
         public static float RelativeCalculator(float bodyWeight, float liftWeight)
         {
             return bodyWeight / liftWeight;
+        }
+
+        public static void SuggestWorkout(string userID)
+        {
+            /// Is it first
+            WorkoutPlan wp = new WorkoutPlan();
+            var v = wp.GetLastWorkoutsByUserId(userID);
+            if (v.Count() == 0)
+            {
+                // Some 1RM suggestions
+            }
+
         }
     }
 }

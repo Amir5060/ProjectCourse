@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCourse.Tests", "ProjectCourse.Tests\ProjectCourse.Tests.csproj", "{738D469F-459E-4660-9BA0-C7DEC066BB4C}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -24,17 +27,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://anotherprojects.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ProjectCourse.Tests\\ProjectCourse.Tests.csproj
-		SccProjectName1 = ProjectCourse.Tests
-		SccLocalPath1 = ProjectCourse.Tests
-		SccProjectUniqueName2 = ProjectCourse\\ProjectCourse.csproj
-		SccProjectName2 = ProjectCourse
-		SccLocalPath2 = ProjectCourse
 	EndGlobalSection
 EndGlobal
