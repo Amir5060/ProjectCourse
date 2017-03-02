@@ -18,7 +18,7 @@ namespace ProjectCourse.Controllers
         // GET: WorkoutPlans
         public ActionResult Index()
         {
-            var workoutPlans = db.WorkoutPlans.Include(w => w.Plan).Include(w => w.Workout);
+            var workoutPlans = db.WorkoutPlans.Include(w => w.Plan).Include(w => w.Workout).OrderBy(x => x.WorkoutID).ThenBy(x => x.WorkoutWeek);
             if (workoutPlans.ToList().Count() == 0)
             {
                 var currentUserID = User.Identity.GetUserId();//We need to get the last C1RM here=======================================
@@ -33,6 +33,9 @@ namespace ProjectCourse.Controllers
                         }
                         else
                         {
+                            WorkoutPlan wp = new WorkoutPlan();
+                            wp.WorkoutsForPlan(currentUserID);
+                            
                             //if (!(workoutPlans.Count() > 0))
                             //{
                             //    var rmWorkouts = db.C1RMWorkout.Where(c => c.RMID == rmID).ToList();
@@ -54,6 +57,24 @@ namespace ProjectCourse.Controllers
                     }
                 }
             }
+            //string str = "SELECT * FROM(" +
+            //                    "SELECT  *, WorkoutID AS wID, WorkoutWeek AS ww" +
+            //                    " FROM        WorkoutPlan " +
+            //                    " WHERE       PlanID = 1) AS src" +
+            //                    " pivot(  SUM(wID)" +
+            //                    " FOR ww in ([1], [2], [3], [4], [5], [6], [7])) piv" +
+            //                    " ORDER BY WorkoutWeek";
+            //var retValue = db.WorkoutPlans.SqlQuery(str).ToList();
+            //var v = (from t in db.WorkoutPlans
+            //         orderby t.WorkoutWeek ascending
+            //         group t by t.WorkoutWeek into WorkoutGroup
+            //         select new WorkoutPlan()
+            //         {
+            //             WorkoutID = WorkoutGroup.Select(x => x.WorkoutID).FirstOrDefault(),
+            //             Repetition = WorkoutGroup.Select(x => x.Repetition).FirstOrDefault()
+            //         });
+            var vvv = workoutPlans.GroupBy(x => x.WorkoutWeek).ToList();
+            ViewBag.WeeksCount = vvv.Count();
             return View(workoutPlans.ToList());
         }
 
@@ -168,5 +189,10 @@ namespace ProjectCourse.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //public partial class WorkoutPlan
+        //{
+        //    public string WorkoutName { get; set; }            
+        //}
     }
 }

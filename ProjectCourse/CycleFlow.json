@@ -3,55 +3,61 @@
     "C01": {
       "Title": "First",
       "Description": "Bones, and tandons",
-      "Sets": "2",
+      "Sets": 2,
       "Weight": 35,
+      "Repetition": 20,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 1,
       "Cycle": "1"
     },
     "C02": {
       "Title": "First",
       "Description": "Bones, and tandons",
-      "Sets": "3",
+      "Sets": 3,
       "Weight": 40,
+      "Repetition": 15,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 2,
       "Cycle": "2"
     },
     "C03": {
       "Title": "Rest",
       "Description": "Bones, and tandons",
-      "Sets": "2",
+      "Sets": 2,
       "Weight": 30,
+      "Repetition": 15,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 3,
       "Cycle": "3"
     },
     "C04": {
       "Title": "First",
       "Description": "Bones, and tandons",
-      "Sets": "3",
+      "Sets": 3,
       "Weight": 45,
+      "Repetition": 12,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 4,
       "Cycle": "4"
     },
     "C05": {
       "Title": "First",
       "Description": "Bones, and tandons",
-      "Sets": "3",
+      "Sets": 3,
       "Weight": 50,
+      "Repetition": 10,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 5,
       "Cycle": "5"
     },
     "C06": {
-      "Title": "Rest",
+      "Title": "Last",
       "Description": "Bones, and tandons",
-      "Sets": "2",
+      "Sets": 2,
       "Weight": 40,
+      "Repetition": 12,
       "Rest": "45-90 Sec",
-      "Week": "1",
+      "Week": 6,
       "Cycle": "6"
     }
   },
@@ -75,6 +81,10 @@
     {
       "CycleName": "C05",
       "NextCycle": "C06"
+    },
+    {
+      "CycleName": "C06",
+      "NextCycle": "C00"
     }
 ]
 }

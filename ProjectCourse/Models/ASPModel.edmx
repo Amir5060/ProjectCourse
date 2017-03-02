@@ -135,8 +135,9 @@
           <Property Name="PlanID" Type="int" Nullable="false" />
           <Property Name="Repetition" Type="int" Nullable="false" />
           <Property Name="WorkoutPlanSet" Type="int" Nullable="false" />
-          <Property Name="Rest" Type="int" Nullable="false" />
+          <Property Name="Rest" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="WorkoutPlanWeight" Type="real" Nullable="false" />
+          <Property Name="WorkoutWeek" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_1RM_User">
           <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
@@ -843,8 +844,9 @@
           <Property Name="PlanID" Type="Int32" Nullable="false" />
           <Property Name="Repetition" Type="Int32" Nullable="false" />
           <Property Name="WorkoutPlanSet" Type="Int32" Nullable="false" />
-          <Property Name="Rest" Type="Int32" Nullable="false" />
+          <Property Name="Rest" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="WorkoutPlanWeight" Type="Single" Nullable="false" />
+          <Property Name="WorkoutWeek" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Plan" Relationship="aspnetModel.FK_WorkoutPlan_Plan" FromRole="WorkoutPlan" ToRole="Plan" />
           <NavigationProperty Name="Workout" Relationship="aspnetModel.FK_WorkoutPlan_Workout" FromRole="WorkoutPlan" ToRole="Workout" />
         </EntityType>
@@ -1049,6 +1051,7 @@
           <EntitySetMapping Name="WorkoutPlans">
             <EntityTypeMapping TypeName="aspnetModel.WorkoutPlan">
               <MappingFragment StoreEntitySet="WorkoutPlan">
+                <ScalarProperty Name="WorkoutWeek" ColumnName="WorkoutWeek" />
                 <ScalarProperty Name="WorkoutPlanWeight" ColumnName="WorkoutPlanWeight" />
                 <ScalarProperty Name="Rest" ColumnName="Rest" />
                 <ScalarProperty Name="WorkoutPlanSet" ColumnName="WorkoutPlanSet" />

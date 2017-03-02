@@ -42,8 +42,14 @@ namespace ProjectCourse.Controllers
         // GET: Plans/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
-            return View();
+            Plan p = new Plan();
+            if (!p.HaveUnfinishedPlan(User.Identity.GetUserId()))
+            {
+                ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
+                return View();
+            }
+            TempData["Message"] = "You can't create new plan because you have an active plan.";
+            return RedirectToAction("Index");
         }
 
         // POST: Plans/Create

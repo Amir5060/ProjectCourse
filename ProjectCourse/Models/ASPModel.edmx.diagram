@@ -30,7 +30,7 @@
         <AssociationConnector Association="aspnetModel.FK_1RMWorkout_1RM" />
         <AssociationConnector Association="aspnetModel.FK_1RMWorkout_Workout" />
         <AssociationConnector Association="aspnetModel.FK_1RMWorkout_1RMWorkout" />
-        <EntityTypeShape EntityType="aspnetModel.WorkoutPlan" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="aspnetModel.WorkoutPlan" Width="1.5" PointX="6" PointY="1" />
         <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Plan" />
         <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Workout" />
       </Diagram>

@@ -274,6 +274,7 @@
     </Compile>
     <Compile Include="Models\CheckAuthorize.cs" />
     <Compile Include="Models\Classes\C1RMWorkout.cs" />
+    <Compile Include="Models\Classes\Plan.cs" />
     <Compile Include="Models\Classes\WorkoutPlan.cs" />
     <Compile Include="Models\EWPUser.cs">
       <DependentUpon>ASPModel.tt</DependentUpon>

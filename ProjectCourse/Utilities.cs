@@ -8,6 +8,8 @@ namespace ProjectCourse
 {
     public static class Utilities
     {
+        private static aspnetEntities db = new aspnetEntities();
+
         /// <summary>
         /// Description:
         ///     For calculating 1RM  by Brzycki formula
@@ -46,6 +48,6 @@ namespace ProjectCourse
                 // Some 1RM suggestions
             }
 
-        }
+        }        
     }
 }

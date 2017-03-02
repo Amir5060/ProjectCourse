@@ -19,8 +19,9 @@ namespace ProjectCourse.Models
         public int PlanID { get; set; }
         public int Repetition { get; set; }
         public int WorkoutPlanSet { get; set; }
-        public int Rest { get; set; }
+        public string Rest { get; set; }
         public float WorkoutPlanWeight { get; set; }
+        public int WorkoutWeek { get; set; }
     
         public virtual Plan Plan { get; set; }
         public virtual Workout Workout { get; set; }

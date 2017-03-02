@@ -11,53 +11,77 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Repetition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkoutPlanSet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkoutPlanWeight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Plan.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Workout.Name)
-        </th>
-        <th></th>
+        <td></td>
+        @for (var j = 0; j < ViewBag.WeeksCount; j++)
+        {
+            <td>
+                Week @(j+1)
+            </td>
+        }
     </tr>
-
-@foreach (var item in Model) {
+    @{ var i = 0;}
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Repetition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rest)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Plan.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Workout.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WorkoutPlanID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WorkoutPlanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WorkoutPlanID })
-        </td>
+        @foreach (var item in Model)
+        {
+            if (i == 0)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Workout.Name)</td>
+            }
+            if (i < ViewBag.WeeksCount)
+            {
+                <td>
+                    <table>
+                        <tr>
+                            <td style="border-width: 0">
+                                @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
+                            </td>
+                            <td rowspan="2" style="border-width: 0; vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Repetition)
+                            </td>
+                        </tr>
+                    </table>                     
+                </td>
+
+            }
+            if (++i == ViewBag.WeeksCount)
+            {
+                @:</tr><tr>
+                i = 0;
+            }
+        }
     </tr>
-}
+        
+
+        @*<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repetition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plan.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Workout.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkoutPlanID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.WorkoutPlanID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkoutPlanID })
+            </td>
+        </tr>*@
+    
 
 </table>
