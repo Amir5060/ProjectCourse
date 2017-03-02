@@ -3,9 +3,42 @@
 @{
     ViewBag.Title = "Log in";
 }
+@{
+    Layout = "~/Views/Shared/_LogCreat.cshtml";
+}
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
+@*<h2>@ViewBag.Title.</h2>*@
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <section id="loginForm">
+        <div>
+            <h1 class="logo-name">EWP</h1>
+        </div>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Username", @required = "" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @required = "" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Log in" class="btn btn-primary block full-width m-b" />
+            //Enable this once you have account confirmation enabled for password reset functionality
+            <p>
+                @Html.ActionLink("Forgot your password", "ForgotPassword")
+            </p>
+            @*<p class="text-muted text-center"><small>Do not have an account?</small></p>*@
+            @Html.ActionLink("Create an account", "Register")
+        }
+    </section>
+</div>
+}
+
+@*<div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -44,10 +77,10 @@
                 <p>
                     @Html.ActionLink("Register as a new user", "Register")
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p>
             }
         </section>
     </div>
@@ -60,4 +93,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
