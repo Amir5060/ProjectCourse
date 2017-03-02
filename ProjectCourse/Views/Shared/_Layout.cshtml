@@ -46,8 +46,43 @@
                         <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
                     </li>
 
-                    
                     @if (Request.IsAuthenticated)
+                    {
+                        HttpContext httpContext = HttpContext.Current;
+                        object id = User.Identity.GetUserId();
+                        <li>
+                            @Html.ActionLink("UserInfo", "../UserInfo/Edit", new { id = User.Identity.GetUserId() })
+                        </li>
+                        if (!User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+                            <li>@Html.ActionLink("Injuries", "Index", "Injuries")</li>
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                            @*<li>@Html.ActionLink("Role", "Index", "Role")</li>*@
+                            <li>
+                                <h3 style="color:white;margin-top:15px;text-align:center">Admin Panel</h3>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Body<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Muscle", "Index", "Muscles")</li>
+                                    <li>@Html.ActionLink("Bone", "Index", "Bones")</li>
+                                    <li>@Html.ActionLink("Joint", "Index", "Joints")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Workout<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Workout", "Index", "Workouts")</li>
+                                    <li>@Html.ActionLink("Sport", "Index", "Sports")</li>
+                                    <li>@Html.ActionLink("Workout Muscles", "Index", "WorkoutMuscles")</li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    @*@if (Request.IsAuthenticated)
                     {
                         HttpContext httpContext = HttpContext.Current;
                         object id = User.Identity.GetUserId();
@@ -73,7 +108,7 @@
                                 </ul>
                             </li>
                         }
-                    }
+                    }*@
                 </ul>
             </div>
         </nav>
