@@ -37,24 +37,28 @@
                         <a href="~/Home/"><i class="fa fa-th-large"></i> <span class="nav-label">Home</span></a>
                     </li>
                     <li>
-                        <a href="~/UserInfo/Edit"><i class="fa fa-info"></i> <span class="nav-label">Userinfo</span></a>
-                    </li>
-                    <li>
                         <a href="~/Home/Contact"><i class="fa fa-flask"></i> <span class="nav-label">Contact</span></a>
                     </li>
-                    <li class="special_link">
-                        <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
-                    </li>
-
-                    
                     @if (Request.IsAuthenticated)
                     {
                         HttpContext httpContext = HttpContext.Current;
                         object id = User.Identity.GetUserId();
+                        <li>
+                            @Html.ActionLink("Plans", "Index", "Plans")
+                        </li>
+                        <li>
+                            @*<a href="~/UserInfo/Edit"><i class="fa fa-info"></i> <span class="nav-label">Userinfo</span></a>*@
+                            @Html.ActionLink("UserInfo", "../UserInfo/Edit", new { id = User.Identity.GetUserId() })
+                        </li>
+
+                        <li class="special_link">
+                            <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
+                        </li>
+
                         if (User.IsInRole("Admin"))
                         {
                             <li>
-                               <h3 style="color:white;margin-top:15px;text-align:center">Admin Panel</h3>
+                                <h3 style="color:white;margin-top:15px;text-align:center">Admin Panel</h3>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Body<b class="caret"></b></a>
@@ -83,15 +87,15 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     </div>
-                        @Html.Partial("_LoginPartial")
+                    @Html.Partial("_LoginPartial")
                 </nav>
             </div>
             <div class="container body-content" style="margin-left: 0">
                 @RenderBody()
                 <hr />
                 @*<footer>
-                    <p>&copy; @DateTime.Now.Year - EWP</p>
-                </footer>*@
+                        <p>&copy; @DateTime.Now.Year - EWP</p>
+                    </footer>*@
             </div>
         </div>
     </div>
