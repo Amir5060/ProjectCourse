@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjectCourse.Controllers
 {
+    [Authorize]
     public class PlansController : Controller
     {
         private aspnetEntities db = new aspnetEntities();

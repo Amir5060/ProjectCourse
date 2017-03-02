@@ -9,6 +9,7 @@ using System.Net;
 
 namespace EWP.Controllers
 {
+    [Authorize]
     public class UserInfoController : Controller
     {
         aspnetEntities db = new aspnetEntities();

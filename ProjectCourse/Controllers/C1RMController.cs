@@ -11,11 +11,13 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjectCourse.Controllers
 {
+    [Authorize]
     public class C1RMController : Controller
-    {
+    {        
         private aspnetEntities db = new aspnetEntities();
 
         // GET: C1RM
+        
         public ActionResult Index()
         {
             var c1RM = db.C1RM.Include(c => c.EWPUser);

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjectCourse.Controllers
 {
+    [Authorize]
     public class WorkoutPlansController : Controller
     {
         private aspnetEntities db = new aspnetEntities();
@@ -18,10 +19,15 @@ namespace ProjectCourse.Controllers
         // GET: WorkoutPlans
         public ActionResult Index()
         {
-            var workoutPlans = db.WorkoutPlans.Include(w => w.Plan).Include(w => w.Workout).OrderBy(x => x.WorkoutID).ThenBy(x => x.WorkoutWeek);
+            // This is not a best way, but who cares!
+            var currentUserID = User.Identity.GetUserId();//We need to get the last C1RM here=======================================
+            // 1. Get the WorkoutPlan
+            // 2. Join with Plan
+            // 3. Join with Workout, and User
+            // 4. Get the last Plan
+            var workoutPlans = db.WorkoutPlans.Include(w => w.Plan).Where(x => x.Plan.EWPUser.UserID == currentUserID);
             if (workoutPlans.ToList().Count() == 0)
-            {
-                var currentUserID = User.Identity.GetUserId();//We need to get the last C1RM here=======================================
+            {                
                 if (db.C1RM.Where(c => c.UserID == currentUserID).Count() > 0)//To see if this user has any current 1RM running available.
                 {
                     var rmID = db.C1RM.SingleOrDefault(c => c.UserID == currentUserID).RMID;//============ I have to get the last RMID
@@ -35,44 +41,13 @@ namespace ProjectCourse.Controllers
                         {
                             WorkoutPlan wp = new WorkoutPlan();
                             wp.WorkoutsForPlan(currentUserID);
-                            
-                            //if (!(workoutPlans.Count() > 0))
-                            //{
-                            //    var rmWorkouts = db.C1RMWorkout.Where(c => c.RMID == rmID).ToList();
-                            //    foreach(var v in rmWorkouts)
-                            //    {
-                            //        var rate = Utilities.RelativeCalculator(db.C1RM.SingleOrDefault(c => c.UserID == currentUserID).UserWeight, Convert.ToSingle(v.Workout1RM));
-                            //        if (db.RelativeStrengthTs.SingleOrDefault(r => r.WorkoutID == v.WorkoutID && r.RelativeStrengthValue == rate).RelativeStrengthPoint < 5)
-                            //        {
-                            //            WorkoutPlan wp = new WorkoutPlan();
-                            //            wp.WorkoutID = v.WorkoutID;
-                            //            wp.PlanID = (db.Plans.Where(p => p.UserID == currentUserID).OrderByDescending(p => p.PlanID)).ToList()[0].PlanID;
-
-                            //        }
-                            //        //v.WorkoutID
-                            //    }
-                            //}
-                            return View(workoutPlans.ToList());
+                            //return View(workoutPlans.ToList());
                         }
                     }
                 }
             }
-            //string str = "SELECT * FROM(" +
-            //                    "SELECT  *, WorkoutID AS wID, WorkoutWeek AS ww" +
-            //                    " FROM        WorkoutPlan " +
-            //                    " WHERE       PlanID = 1) AS src" +
-            //                    " pivot(  SUM(wID)" +
-            //                    " FOR ww in ([1], [2], [3], [4], [5], [6], [7])) piv" +
-            //                    " ORDER BY WorkoutWeek";
-            //var retValue = db.WorkoutPlans.SqlQuery(str).ToList();
-            //var v = (from t in db.WorkoutPlans
-            //         orderby t.WorkoutWeek ascending
-            //         group t by t.WorkoutWeek into WorkoutGroup
-            //         select new WorkoutPlan()
-            //         {
-            //             WorkoutID = WorkoutGroup.Select(x => x.WorkoutID).FirstOrDefault(),
-            //             Repetition = WorkoutGroup.Select(x => x.Repetition).FirstOrDefault()
-            //         });
+            // More accurate with order, and name of the workouts, and the last unfinished plan.
+            workoutPlans = db.WorkoutPlans.Include(w => w.Plan).Where(x => x.Plan.EWPUser.UserID == currentUserID && x.Plan.FinishDate == null).Include(w => w.Workout).OrderBy(x => x.WorkoutID).ThenBy(x => x.WorkoutWeek);
             var vvv = workoutPlans.GroupBy(x => x.WorkoutWeek).ToList();
             ViewBag.WeeksCount = vvv.Count();
             return View(workoutPlans.ToList());

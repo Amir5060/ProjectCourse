@@ -12,6 +12,7 @@ using System.Web.Security;
 
 namespace ProjectCourse.Controllers
 {
+    [Authorize]
     public class InjuriesController : Controller
     {
         private aspnetEntities db = new aspnetEntities();
