@@ -7,57 +7,118 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")*@
+    <!-- Button to trigger modal -->
+    <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+        Hint
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">How to read the numbers in the plan</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td style="border-width: 0">
+                                Weight
+                            </td>
+                            <td rowspan="2" style="border-width: 0; vertical-align: middle;">
+                                Sets
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top-width: 1px; border-top-color: black; border-top-style: solid;">
+                                Repetitions
+                            </td>
+                        </tr>
+                    </table> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </p>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Repetition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkoutPlanSet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkoutPlanWeight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Plan.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Workout.Name)
-        </th>
-        <th></th>
+        <td></td>
+        @for (var j = 0; j < ViewBag.WeeksCount; j++)
+        {
+            <td>
+                Week @(j+1)
+            </td>
+        }
     </tr>
-
-@foreach (var item in Model) {
+    @{ var i = 0;}
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Repetition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rest)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Plan.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Workout.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WorkoutPlanID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WorkoutPlanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WorkoutPlanID })
-        </td>
+        @foreach (var item in Model)
+        {
+            if (i == 0)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Workout.Name)</td>
+            }
+            if (i < ViewBag.WeeksCount)
+            {
+                <td>
+                    <table>
+                        <tr>
+                            <td style="border-width: 0" title="Weight">
+                                @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
+                            </td>
+                            <td rowspan="2" style="border-width: 0; vertical-align: middle;" title="Number of Sets">
+                                @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td title="Number of repetitions">
+                                @Html.DisplayFor(modelItem => item.Repetition)
+                            </td>
+                        </tr>
+                    </table>                     
+                </td>
+
+            }
+            if (++i == ViewBag.WeeksCount)
+            {
+                @:</tr><tr>
+                i = 0;
+            }
+        }
     </tr>
-}
+        
+
+        @*<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repetition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkoutPlanSet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkoutPlanWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plan.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Workout.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkoutPlanID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.WorkoutPlanID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkoutPlanID })
+            </td>
+        </tr>*@
+    
 
 </table>

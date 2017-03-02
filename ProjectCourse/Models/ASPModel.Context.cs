@@ -38,8 +38,8 @@ namespace ProjectCourse.Models
         public virtual DbSet<Sport> Sports { get; set; }
         public virtual DbSet<Workout> Workouts { get; set; }
         public virtual DbSet<WorkoutMuscle> WorkoutMuscles { get; set; }
-        public virtual DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public virtual DbSet<C1RMWorkout> C1RMWorkout { get; set; }
+        public virtual DbSet<WorkoutPlan> WorkoutPlans { get; set; }
     
         public virtual ObjectResult<GetAllSports_Result> GetAllSports()
         {

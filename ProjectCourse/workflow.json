@@ -1,0 +1,75 @@
+  {
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "WorkoutWorkFlow": {
+    "Steps": {
+      "S00": {
+        "Title": "Create plan",
+        "Description": "The first step when a user click on create new plan."
+      },
+      "S01": {
+        "Title": "Suggest plan",
+        "Description": "In this step, the application will suggest some exercises, and there are some considrations"
+      },
+      "S02": {
+        "Title": "Check injuries",
+        "Description": "Check if a user had a previous injuries."
+      },
+      "S03": {
+        "Title": "",
+        "Description": ""
+      },
+      "S04": {
+        "Description": "",
+        "Title": ""
+      },
+      "S05": {
+        "Title": "",
+        "Description": ""
+      },
+      "S06": {
+        "Title": "",
+        "Description": ""
+      },
+      "S07": {
+        "Title": "",
+        "Description": ""
+      },
+      "S08": {
+        "Title": "",
+        "Description": ""
+      },
+      "S09": {
+        "Title": "",
+        "Description": ""
+      },
+      "S10": {
+        "Title": "",
+        "Description": ""
+      },
+      "S11": {
+        "Title": "",
+        "Description": ""
+      },
+      "S12": {
+        "Description": "",
+        "Title": ""
+      }
+    },
+    "StepsFlow": [
+      {
+        "StateName": "S00",
+        "NextState": "S01"
+      },
+      {
+        "StateName": "S01",
+        "NextState": "S02"
+      }
+    ]    
+  }
+}

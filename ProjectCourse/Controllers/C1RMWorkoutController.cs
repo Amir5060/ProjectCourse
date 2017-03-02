@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjectCourse.Controllers
 {
+    [Authorize]
     public class C1RMWorkoutController : Controller
     {
         private aspnetEntities db = new aspnetEntities();
@@ -164,7 +165,7 @@ namespace ProjectCourse.Controllers
 
         /// <summary>
         /// Description:
-        ///     Send the user to his workouts for this plan.
+        ///     Send the user his workouts for this plan.
         /// History:
         ///     Amir Naji   02/12/2016
         /// </summary>

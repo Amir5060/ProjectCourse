@@ -1,0 +1,58 @@
+﻿@model ProjectCourse.Models.Injury
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Injury</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InjuryDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InjuryDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bone.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bone.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EWPUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EWPUser.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Joint.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Joint.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Muscle.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Muscle.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InjuryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

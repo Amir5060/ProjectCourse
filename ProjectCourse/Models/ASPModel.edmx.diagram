@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="aspnetModel.Sport" Width="1.5" PointX="1.5" PointY="18.375" />
         <EntityTypeShape EntityType="aspnetModel.Workout" Width="1.5" PointX="3.75" PointY="1" />
         <EntityTypeShape EntityType="aspnetModel.WorkoutMuscle" Width="1.5" PointX="6" PointY="4.75" />
-        <EntityTypeShape EntityType="aspnetModel.WorkoutPlan" Width="1.5" PointX="6" PointY="0.75" />
         <AssociationConnector Association="aspnetModel.FK_1RM_User" />
         <AssociationConnector Association="aspnetModel.FK_Injury_Bone" />
         <AssociationConnector Association="aspnetModel.FK_Injury_User" />
@@ -25,13 +24,15 @@
         <AssociationConnector Association="aspnetModel.FK_Injury_Joint" />
         <AssociationConnector Association="aspnetModel.FK_Injury_Muscle" />
         <AssociationConnector Association="aspnetModel.FK_WorkoutMuscle_Muscle" />
-        <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Plan" />
         <AssociationConnector Association="aspnetModel.FK_WorkoutMuscle_Workout" />
-        <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Workout" />
         <AssociationConnector Association="aspnetModel.FK_RelativeStrengthT_Workout" />
         <EntityTypeShape EntityType="aspnetModel.C1RMWorkout" Width="1.5" PointX="11" PointY="4.75" />
         <AssociationConnector Association="aspnetModel.FK_1RMWorkout_1RM" />
         <AssociationConnector Association="aspnetModel.FK_1RMWorkout_Workout" />
+        <AssociationConnector Association="aspnetModel.FK_1RMWorkout_1RMWorkout" />
+        <EntityTypeShape EntityType="aspnetModel.WorkoutPlan" Width="1.5" PointX="6" PointY="1" />
+        <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Plan" />
+        <AssociationConnector Association="aspnetModel.FK_WorkoutPlan_Workout" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

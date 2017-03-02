@@ -9,6 +9,7 @@ using System.Net;
 
 namespace EWP.Controllers
 {
+    [Authorize]
     public class UserInfoController : Controller
     {
         aspnetEntities db = new aspnetEntities();
@@ -107,7 +108,7 @@ namespace EWP.Controllers
                     newUser.UserID = id.ToString();
                     newUser.FirstName = collection["FirstName"];
                     newUser.LastName = collection["LastName"];
-                    newUser.Gender = collection["Gender"];
+                    newUser.Gender = collection["GenderList"];
                     if (collection["DateOfBirth"] != null)
                         if (collection["DateOfBirth"].ToString().Trim() != "")
                             newUser.DateOfBirth = Convert.ToDateTime(collection["DateOfBirth"]);
@@ -134,7 +135,7 @@ namespace EWP.Controllers
                     newUser.UserID = id.ToString();
                     newUser.FirstName = collection["FirstName"];
                     newUser.LastName = collection["LastName"];
-                    newUser.Gender = collection["Gender"];
+                    newUser.Gender = collection["GenderList"];
                     if (collection["DateOfBirth"] != null)
                         if (collection["DateOfBirth"].ToString().Trim() != "")
                             newUser.DateOfBirth = Convert.ToDateTime(collection["DateOfBirth"]);

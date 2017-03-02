@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjectCourse.Models.Injury>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InjuryDescription)
+        </th>
+        <th>
+            Bone Name
+        </th>
+        <th>
+            Joint Name
+        </th>
+        <th>
+            Muscle Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.InjuryDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bone.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Joint.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Muscle.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InjuryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InjuryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InjuryID })
+        </td>
+    </tr>
+}
+
+</table>

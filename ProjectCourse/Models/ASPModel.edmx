@@ -25,6 +25,7 @@
           <Property Name="Repetition" Type="int" />
           <Property Name="RMWorkoutDate" Type="date" />
           <Property Name="Workout1RM" Type="real" />
+          <Property Name="RMPlanId" Type="int" />
         </EntityType>
         <EntityType Name="Bone">
           <Key>
@@ -85,6 +86,7 @@
           <Property Name="Microcycle" Type="nvarchar" MaxLength="500" />
           <Property Name="WorkoutTime" Type="int" />
           <Property Name="PlanDate" Type="date" />
+          <Property Name="FinishDate" Type="date" />
         </EntityType>
         <EntityType Name="RelativeStrengthT">
           <Key>
@@ -133,8 +135,9 @@
           <Property Name="PlanID" Type="int" Nullable="false" />
           <Property Name="Repetition" Type="int" Nullable="false" />
           <Property Name="WorkoutPlanSet" Type="int" Nullable="false" />
-          <Property Name="Rest" Type="int" Nullable="false" />
-          <Property Name="WorkoutPlanWeight" Type="int" Nullable="false" />
+          <Property Name="Rest" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkoutPlanWeight" Type="real" Nullable="false" />
+          <Property Name="WorkoutWeek" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_1RM_User">
           <End Role="EWPUser" Type="Self.EWPUser" Multiplicity="1" />
@@ -157,6 +160,18 @@
             </Principal>
             <Dependent Role="1RMWorkout">
               <PropertyRef Name="RMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_1RMWorkout">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="0..1" />
+          <End Role="1RMWorkout" Type="Self.1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="1RMWorkout">
+              <PropertyRef Name="RMPlanId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -330,6 +345,10 @@
             <End Role="1RM" EntitySet="1RM" />
             <End Role="1RMWorkout" EntitySet="1RMWorkout" />
           </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_1RMWorkout" Association="Self.FK_1RMWorkout_1RMWorkout">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="1RMWorkout" EntitySet="1RMWorkout" />
+          </AssociationSet>
           <AssociationSet Name="FK_1RMWorkout_Workout" Association="Self.FK_1RMWorkout_Workout">
             <End Role="Workout" EntitySet="Workout" />
             <End Role="1RMWorkout" EntitySet="1RMWorkout" />
@@ -399,7 +418,6 @@
           <EntitySet Name="Sports" EntityType="aspnetModel.Sport" />
           <EntitySet Name="Workouts" EntityType="aspnetModel.Workout" />
           <EntitySet Name="WorkoutMuscles" EntityType="aspnetModel.WorkoutMuscle" />
-          <EntitySet Name="WorkoutPlans" EntityType="aspnetModel.WorkoutPlan" />
           <AssociationSet Name="FK_1RM_User" Association="aspnetModel.FK_1RM_User">
             <End Role="EWPUser" EntitySet="EWPUsers" />
             <End Role="C1RM" EntitySet="C1RM" />
@@ -432,17 +450,9 @@
             <End Role="Muscle" EntitySet="Muscles" />
             <End Role="WorkoutMuscle" EntitySet="WorkoutMuscles" />
           </AssociationSet>
-          <AssociationSet Name="FK_WorkoutPlan_Plan" Association="aspnetModel.FK_WorkoutPlan_Plan">
-            <End Role="Plan" EntitySet="Plans" />
-            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
-          </AssociationSet>
           <AssociationSet Name="FK_WorkoutMuscle_Workout" Association="aspnetModel.FK_WorkoutMuscle_Workout">
             <End Role="Workout" EntitySet="Workouts" />
             <End Role="WorkoutMuscle" EntitySet="WorkoutMuscles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkoutPlan_Workout" Association="aspnetModel.FK_WorkoutPlan_Workout">
-            <End Role="Workout" EntitySet="Workouts" />
-            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
           </AssociationSet>
           <AssociationSet Name="FK_RelativeStrengthT_Workout" Association="aspnetModel.FK_RelativeStrengthT_Workout">
             <End Role="Workout" EntitySet="Workouts" />
@@ -456,6 +466,19 @@
           <AssociationSet Name="FK_1RMWorkout_Workout" Association="aspnetModel.FK_1RMWorkout_Workout">
             <End Role="Workout" EntitySet="Workouts" />
             <End Role="C1RMWorkout" EntitySet="C1RMWorkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1RMWorkout_1RMWorkout" Association="aspnetModel.FK_1RMWorkout_1RMWorkout">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="C1RMWorkout" EntitySet="C1RMWorkout" />
+          </AssociationSet>
+          <EntitySet Name="WorkoutPlans" EntityType="aspnetModel.WorkoutPlan" />
+          <AssociationSet Name="FK_WorkoutPlan_Plan" Association="aspnetModel.FK_WorkoutPlan_Plan">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkoutPlan_Workout" Association="aspnetModel.FK_WorkoutPlan_Workout">
+            <End Role="Workout" EntitySet="Workouts" />
+            <End Role="WorkoutPlan" EntitySet="WorkoutPlans" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetAllSports_Result">
@@ -568,6 +591,8 @@
           <Property Name="WorkoutTime" Type="Int32" />
           <Property Name="PlanDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="EWPUser" Relationship="aspnetModel.FK_Plan_User" FromRole="Plan" ToRole="EWPUser" />
+          <Property Name="FinishDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="C1RMWorkout" Relationship="aspnetModel.FK_1RMWorkout_1RMWorkout" FromRole="Plan" ToRole="C1RMWorkout" />
           <NavigationProperty Name="WorkoutPlans" Relationship="aspnetModel.FK_WorkoutPlan_Plan" FromRole="Plan" ToRole="WorkoutPlan" />
         </EntityType>
         <EntityType Name="RelativeStrengthT">
@@ -598,9 +623,9 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Difficulty" Type="Int32" Nullable="false" />
           <NavigationProperty Name="WorkoutMuscles" Relationship="aspnetModel.FK_WorkoutMuscle_Workout" FromRole="Workout" ToRole="WorkoutMuscle" />
-          <NavigationProperty Name="WorkoutPlans" Relationship="aspnetModel.FK_WorkoutPlan_Workout" FromRole="Workout" ToRole="WorkoutPlan" />
           <NavigationProperty Name="RelativeStrengthTs" Relationship="aspnetModel.FK_RelativeStrengthT_Workout" FromRole="Workout" ToRole="RelativeStrengthT" />
           <NavigationProperty Name="C1RMWorkout" Relationship="aspnetModel.FK_1RMWorkout_Workout" FromRole="Workout" ToRole="C1RMWorkout" />
+          <NavigationProperty Name="WorkoutPlans" Relationship="aspnetModel.FK_WorkoutPlan_Workout" FromRole="Workout" ToRole="WorkoutPlan" />
         </EntityType>
         <EntityType Name="WorkoutMuscle">
           <Key>
@@ -615,20 +640,6 @@
           <Property Name="Lengthening" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Muscle" Relationship="aspnetModel.FK_WorkoutMuscle_Muscle" FromRole="WorkoutMuscle" ToRole="Muscle" />
           <NavigationProperty Name="Workout" Relationship="aspnetModel.FK_WorkoutMuscle_Workout" FromRole="WorkoutMuscle" ToRole="Workout" />
-        </EntityType>
-        <EntityType Name="WorkoutPlan">
-          <Key>
-            <PropertyRef Name="WorkoutPlanID" />
-          </Key>
-          <Property Name="WorkoutPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WorkoutID" Type="Int32" Nullable="false" />
-          <Property Name="PlanID" Type="Int32" Nullable="false" />
-          <Property Name="Repetition" Type="Int32" Nullable="false" />
-          <Property Name="WorkoutPlanSet" Type="Int32" Nullable="false" />
-          <Property Name="Rest" Type="Int32" Nullable="false" />
-          <Property Name="WorkoutPlanWeight" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Plan" Relationship="aspnetModel.FK_WorkoutPlan_Plan" FromRole="WorkoutPlan" ToRole="Plan" />
-          <NavigationProperty Name="Workout" Relationship="aspnetModel.FK_WorkoutPlan_Workout" FromRole="WorkoutPlan" ToRole="Workout" />
         </EntityType>
         <Association Name="FK_1RM_User">
           <End Type="aspnetModel.EWPUser" Role="EWPUser" Multiplicity="1" />
@@ -726,18 +737,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WorkoutPlan_Plan">
-          <End Type="aspnetModel.Plan" Role="Plan" Multiplicity="1" />
-          <End Type="aspnetModel.WorkoutPlan" Role="WorkoutPlan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Plan">
-              <PropertyRef Name="PlanID" />
-            </Principal>
-            <Dependent Role="WorkoutPlan">
-              <PropertyRef Name="PlanID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WorkoutMuscle_Workout">
           <End Type="aspnetModel.Workout" Role="Workout" Multiplicity="1" />
           <End Type="aspnetModel.WorkoutMuscle" Role="WorkoutMuscle" Multiplicity="*" />
@@ -746,18 +745,6 @@
               <PropertyRef Name="WorkoutID" />
             </Principal>
             <Dependent Role="WorkoutMuscle">
-              <PropertyRef Name="WorkoutID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkoutPlan_Workout">
-          <End Type="aspnetModel.Workout" Role="Workout" Multiplicity="1" />
-          <End Type="aspnetModel.WorkoutPlan" Role="WorkoutPlan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Workout">
-              <PropertyRef Name="WorkoutID" />
-            </Principal>
-            <Dependent Role="WorkoutPlan">
               <PropertyRef Name="WorkoutID" />
             </Dependent>
           </ReferentialConstraint>
@@ -809,6 +796,8 @@
           <Property Name="Workout1RM" Type="Single" />
           <NavigationProperty Name="C1RM" Relationship="aspnetModel.FK_1RMWorkout_1RM" FromRole="C1RMWorkout" ToRole="C1RM" />
           <NavigationProperty Name="Workout" Relationship="aspnetModel.FK_1RMWorkout_Workout" FromRole="C1RMWorkout" ToRole="Workout" />
+          <Property Name="RMPlanId" Type="Int32" />
+          <NavigationProperty Name="Plan" Relationship="aspnetModel.FK_1RMWorkout_1RMWorkout" FromRole="C1RMWorkout" ToRole="Plan" />
         </EntityType>
         <Association Name="FK_1RMWorkout_1RM">
           <End Type="aspnetModel.C1RM" Role="C1RM" Multiplicity="1" />
@@ -830,6 +819,57 @@
               <PropertyRef Name="WorkoutID" />
             </Principal>
             <Dependent Role="C1RMWorkout">
+              <PropertyRef Name="WorkoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1RMWorkout_1RMWorkout">
+          <End Type="aspnetModel.Plan" Role="Plan" Multiplicity="0..1" />
+          <End Type="aspnetModel.C1RMWorkout" Role="C1RMWorkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="C1RMWorkout">
+              <PropertyRef Name="RMPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkoutPlan">
+          <Key>
+            <PropertyRef Name="WorkoutPlanID" />
+          </Key>
+          <Property Name="WorkoutPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkoutID" Type="Int32" Nullable="false" />
+          <Property Name="PlanID" Type="Int32" Nullable="false" />
+          <Property Name="Repetition" Type="Int32" Nullable="false" />
+          <Property Name="WorkoutPlanSet" Type="Int32" Nullable="false" />
+          <Property Name="Rest" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WorkoutPlanWeight" Type="Single" Nullable="false" />
+          <Property Name="WorkoutWeek" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plan" Relationship="aspnetModel.FK_WorkoutPlan_Plan" FromRole="WorkoutPlan" ToRole="Plan" />
+          <NavigationProperty Name="Workout" Relationship="aspnetModel.FK_WorkoutPlan_Workout" FromRole="WorkoutPlan" ToRole="Workout" />
+        </EntityType>
+        <Association Name="FK_WorkoutPlan_Plan">
+          <End Type="aspnetModel.Plan" Role="Plan" Multiplicity="1" />
+          <End Type="aspnetModel.WorkoutPlan" Role="WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkoutPlan_Workout">
+          <End Type="aspnetModel.Workout" Role="Workout" Multiplicity="1" />
+          <End Type="aspnetModel.WorkoutPlan" Role="WorkoutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workout">
+              <PropertyRef Name="WorkoutID" />
+            </Principal>
+            <Dependent Role="WorkoutPlan">
               <PropertyRef Name="WorkoutID" />
             </Dependent>
           </ReferentialConstraint>
@@ -917,6 +957,7 @@
           <EntitySetMapping Name="Plans">
             <EntityTypeMapping TypeName="aspnetModel.Plan">
               <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
                 <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
                 <ScalarProperty Name="WorkoutTime" ColumnName="WorkoutTime" />
                 <ScalarProperty Name="Microcycle" ColumnName="Microcycle" />
@@ -967,19 +1008,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WorkoutPlans">
-            <EntityTypeMapping TypeName="aspnetModel.WorkoutPlan">
-              <MappingFragment StoreEntitySet="WorkoutPlan">
-                <ScalarProperty Name="WorkoutPlanWeight" ColumnName="WorkoutPlanWeight" />
-                <ScalarProperty Name="Rest" ColumnName="Rest" />
-                <ScalarProperty Name="WorkoutPlanSet" ColumnName="WorkoutPlanSet" />
-                <ScalarProperty Name="Repetition" ColumnName="Repetition" />
-                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
-                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
-                <ScalarProperty Name="WorkoutPlanID" ColumnName="WorkoutPlanID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetUserByUserID" FunctionName="aspnetModel.Store.GetUserByUserID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="aspnetModel.GetUserByUserID_Result">
@@ -1009,6 +1037,7 @@
           <EntitySetMapping Name="C1RMWorkout">
             <EntityTypeMapping TypeName="aspnetModel.C1RMWorkout">
               <MappingFragment StoreEntitySet="1RMWorkout">
+                <ScalarProperty Name="RMPlanId" ColumnName="RMPlanId" />
                 <ScalarProperty Name="Workout1RM" ColumnName="Workout1RM" />
                 <ScalarProperty Name="RMWorkoutDate" ColumnName="RMWorkoutDate" />
                 <ScalarProperty Name="Repetition" ColumnName="Repetition" />
@@ -1016,6 +1045,20 @@
                 <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
                 <ScalarProperty Name="RMID" ColumnName="RMID" />
                 <ScalarProperty Name="RMWorkoutID" ColumnName="RMWorkoutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutPlans">
+            <EntityTypeMapping TypeName="aspnetModel.WorkoutPlan">
+              <MappingFragment StoreEntitySet="WorkoutPlan">
+                <ScalarProperty Name="WorkoutWeek" ColumnName="WorkoutWeek" />
+                <ScalarProperty Name="WorkoutPlanWeight" ColumnName="WorkoutPlanWeight" />
+                <ScalarProperty Name="Rest" ColumnName="Rest" />
+                <ScalarProperty Name="WorkoutPlanSet" ColumnName="WorkoutPlanSet" />
+                <ScalarProperty Name="Repetition" ColumnName="Repetition" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="WorkoutID" ColumnName="WorkoutID" />
+                <ScalarProperty Name="WorkoutPlanID" ColumnName="WorkoutPlanID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

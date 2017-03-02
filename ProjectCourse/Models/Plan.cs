@@ -17,6 +17,7 @@ namespace ProjectCourse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plan()
         {
+            this.C1RMWorkout = new HashSet<C1RMWorkout>();
             this.WorkoutPlans = new HashSet<WorkoutPlan>();
         }
     
@@ -25,8 +26,11 @@ namespace ProjectCourse.Models
         public string Microcycle { get; set; }
         public Nullable<int> WorkoutTime { get; set; }
         public Nullable<System.DateTime> PlanDate { get; set; }
+        public Nullable<System.DateTime> FinishDate { get; set; }
     
         public virtual EWPUser EWPUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<C1RMWorkout> C1RMWorkout { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
     }

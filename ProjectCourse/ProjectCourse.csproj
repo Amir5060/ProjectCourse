@@ -52,6 +52,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -210,6 +230,7 @@
     <Compile Include="Controllers\C1RMController.cs" />
     <Compile Include="Controllers\C1RMWorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InjuriesController.cs" />
     <Compile Include="Controllers\JointsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MusclesController.cs" />
@@ -222,6 +243,7 @@
     <Compile Include="Controllers\WorkoutMusclesController.cs" />
     <Compile Include="Controllers\WorkoutPlansController.cs" />
     <Compile Include="Controllers\WorkoutsController.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -251,6 +273,9 @@
       <DependentUpon>ASPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CheckAuthorize.cs" />
+    <Compile Include="Models\Classes\C1RMWorkout.cs" />
+    <Compile Include="Models\Classes\Plan.cs" />
+    <Compile Include="Models\Classes\WorkoutPlan.cs" />
     <Compile Include="Models\EWPUser.cs">
       <DependentUpon>ASPModel.tt</DependentUpon>
     </Compile>
@@ -328,6 +353,7 @@
     <Content Include="Models\ASPModel.edmx.diagram">
       <DependentUpon>ASPModel.edmx</DependentUpon>
     </Content>
+    <Content Include="CycleFlow.json" />
     <None Include="Properties\PublishProfiles\EWP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -341,6 +367,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Sql.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -437,6 +464,13 @@
     <Content Include="Views\RelativeStrengthTs\Details.cshtml" />
     <Content Include="Views\RelativeStrengthTs\Edit.cshtml" />
     <Content Include="Views\RelativeStrengthTs\Index.cshtml" />
+    <Content Include="workflow.json" />
+    <Content Include="Views\Injuries\Create.cshtml" />
+    <Content Include="Views\Injuries\Delete.cshtml" />
+    <Content Include="Views\Injuries\Details.cshtml" />
+    <Content Include="Views\Injuries\Edit.cshtml" />
+    <Content Include="Views\Injuries\Index.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
