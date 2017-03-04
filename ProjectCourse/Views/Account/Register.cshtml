@@ -18,7 +18,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Username", @required = "" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @required = "" })
             </div>
             <div class="form-group">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @required = "" })

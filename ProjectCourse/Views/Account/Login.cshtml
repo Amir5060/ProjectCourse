@@ -11,15 +11,16 @@
 
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <section id="loginForm">
-        <div>
-            <h1 class="logo-name">EWP</h1>
-        </div>
+
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div>
+                <h1 class="logo-name">EWP</h1>
+            </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Username", @required = "" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @required = "" })
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
@@ -31,12 +32,14 @@
             <p>
                 @Html.ActionLink("Forgot your password", "ForgotPassword")
             </p>
-            @*<p class="text-muted text-center"><small>Do not have an account?</small></p>*@
-            @Html.ActionLink("Create an account", "Register")
+            <p class="text-muted text-center"><small>Do not have an account?</small></p>
+            @*@Html.ActionLink("Create an account", "Register")*@
+            <a class="btn btn-sm btn-white btn-block" href="Register">Create an account</a>
+
         }
     </section>
 </div>
-}
+
 
 @*<div class="row">
     <div class="col-md-8">
