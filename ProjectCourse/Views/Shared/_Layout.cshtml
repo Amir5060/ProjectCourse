@@ -39,17 +39,28 @@
                     <li>
                         <a href="~/Home/Contact"><i class="fa fa-envelope"></i> <span class="nav-label">Contact</span></a>
                     </li>
+                    <li>
+                        <a href="~/Home/Contact"><i class="fa fa-flask"></i> <span class="nav-label">Contact</span></a>
+                    </li>
+                    <li class="special_link">
+                        <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
+                    </li>
+
                     @if (Request.IsAuthenticated)
                     {
+                        HttpContext httpContext = HttpContext.Current;
+                        object id = User.Identity.GetUserId();
                         <li>
-                            <a href="~/Plans/"><i class="fa fa-trophy"></i> <span class="nav-label">Plans</span></a>
+                            @Html.ActionLink("UserInfo", "../UserInfo/Edit", new { id = User.Identity.GetUserId() })
                         </li>
-                        <li class="special_link">
-                            <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
-                        </li>
-
+                        if (!User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+                            <li>@Html.ActionLink("Injuries", "Index", "Injuries")</li>
+                        }
                         if (User.IsInRole("Admin"))
                         {
+                            @*<li>@Html.ActionLink("Role", "Index", "Role")</li>*@
                             <li>
                                 <h3 style="color:white;margin-top:15px;text-align:center">Admin Panel</h3>
                             </li>
@@ -71,6 +82,33 @@
                             </li>
                         }
                     }
+                    @*@if (Request.IsAuthenticated)
+                    {
+                        HttpContext httpContext = HttpContext.Current;
+                        object id = User.Identity.GetUserId();
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                               <h3 style="color:white;margin-top:15px;text-align:center">Admin Panel</h3>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Body<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Muscle", "Index", "Muscles")</li>
+                                    <li>@Html.ActionLink("Bone", "Index", "Bones")</li>
+                                    <li>@Html.ActionLink("Joint", "Index", "Joints")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="margin-right: 5px;" href="#" data-toggle="dropdown">Workout<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Workout", "Index", "Workouts")</li>
+                                    <li>@Html.ActionLink("Sport", "Index", "Sports")</li>
+                                    <li>@Html.ActionLink("Workout Muscles", "Index", "WorkoutMuscles")</li>
+                                </ul>
+                            </li>
+                        }
+                    }*@
                 </ul>
             </div>
         </nav>
