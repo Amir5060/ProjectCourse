@@ -19,7 +19,8 @@ namespace ProjectCourse.Controllers
         // GET: C1RMWorkout
         public ActionResult Index()
         {
-            var c1RMWorkout = db.C1RMWorkout.Include(c => c.C1RM).Include(c => c.Workout);
+            var userId = User.Identity.GetUserId();
+            var c1RMWorkout = db.C1RMWorkout.Include(c => c.C1RM).Where(c => c.Plan.UserID == userId && c.Plan.FinishDate == null).Include(c => c.Workout);
             return View(c1RMWorkout.ToList());
         }
 
@@ -47,7 +48,8 @@ namespace ProjectCourse.Controllers
                 var rmID = db.C1RM.SingleOrDefault(c => c.UserID == currentUserID).RMID;
                 if (db.C1RMWorkout.Where(c => c.RMID == rmID).Count() > 0)
                 {
-                    return Index();
+                    var retVal = db.C1RMWorkout.Where(c => c.RMID == rmID);
+                    return View(retVal);
                     //ViewBag.RMID = new SelectList(db.C1RM, "RMID", "UserID");
                     //ViewBag.WorkoutID = new SelectList(db.Workouts, "WorkoutID", "Name");
                     //return View();
@@ -57,12 +59,14 @@ namespace ProjectCourse.Controllers
                     //Just for the first time, and for the test how the users physical status is.
                     int[] workoutID = new int[] { 1, 5, 6, 7, 8, 9 };//List of all workout's IDs for the first period.
                     C1RMWorkout c1RMWorkout;
+                    var userPlan = db.Plans.FirstOrDefault(x => x.UserID == currentUserID);
                     for (int i = 0; i < 6; i++)
                     {
                         c1RMWorkout = new Models.C1RMWorkout();
                         c1RMWorkout.RMID = rmID;
                         c1RMWorkout.RMWorkoutDate = DateTime.Now.Date;
                         c1RMWorkout.WorkoutID = workoutID[i];
+                        c1RMWorkout.RMPlanId = userPlan.PlanID;
                         db.C1RMWorkout.Add(c1RMWorkout);
                         db.SaveChanges();
                     }

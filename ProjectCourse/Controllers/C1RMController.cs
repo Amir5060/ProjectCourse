@@ -20,7 +20,8 @@ namespace ProjectCourse.Controllers
         
         public ActionResult Index()
         {
-            var c1RM = db.C1RM.Include(c => c.EWPUser);
+            var userId = User.Identity.GetUserId();
+            var c1RM = db.C1RM.Where(x => x.UserID == userId).Include(c => c.EWPUser).ToList();
             return View(c1RM.ToList());
         }
 
