@@ -39,9 +39,6 @@
                     <li>
                         <a href="~/Home/Contact"><i class="fa fa-envelope"></i> <span class="nav-label">Contact</span></a>
                     </li>
-                    <li>
-                        <a href="~/Home/Contact"><i class="fa fa-flask"></i> <span class="nav-label">Contact</span></a>
-                    </li>
                     <li class="special_link">
                         <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
                     </li>
@@ -50,9 +47,6 @@
                     {
                         HttpContext httpContext = HttpContext.Current;
                         object id = User.Identity.GetUserId();
-                        <li>
-                            @Html.ActionLink("UserInfo", "../UserInfo/Edit", new { id = User.Identity.GetUserId() })
-                        </li>
                         if (!User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
