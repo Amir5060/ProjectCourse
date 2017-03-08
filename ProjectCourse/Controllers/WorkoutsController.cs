@@ -10,7 +10,6 @@ using ProjectCourse.Models;
 
 namespace ProjectCourse.Controllers
 {
-    [CheckAuthorize(Roles = "Admin")]
     public class WorkoutsController : Controller
     {
         private aspnetEntities db = new aspnetEntities();

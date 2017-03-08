@@ -1,7 +1,8 @@
-﻿@model ProjectCourse.Models.WorkoutMuscle
+﻿@model ProjectCourse.Models.Workout
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Edit</h2>
@@ -10,66 +11,26 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-        <h4>WorkoutMuscle</h4>
+        <h4>Workout</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.WorkoutMuscleID)
+        @Html.HiddenFor(model => model.WorkoutID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WorkoutID, "Workout", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("WorkoutID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WorkoutID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MuscleID, "Muscle", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Difficulty, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MuscleID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MuscleID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PrimMover, "Prime mover", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.PrimMover)
-                    @Html.ValidationMessageFor(model => model.PrimMover, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Synergist, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Synergist)
-                    @Html.ValidationMessageFor(model => model.Synergist, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Stabilizer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Stabilizer)
-                    @Html.ValidationMessageFor(model => model.Stabilizer, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Lengthening, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Lengthening)
-                    @Html.ValidationMessageFor(model => model.Lengthening, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.Difficulty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
             </div>
         </div>
 

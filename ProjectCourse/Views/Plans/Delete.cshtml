@@ -11,7 +11,7 @@
     <h4>Plan</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Microcycle)
         </dt>
 
@@ -25,12 +25,10 @@
 
         <dd>
             @Html.DisplayFor(model => model.WorkoutTime)
-        </dd>
-
+        </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.PlanDate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.PlanDate)
         </dd>
@@ -42,7 +40,13 @@
         <dd>
             @Html.DisplayFor(model => model.EWPUser.FirstName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EWPUser.LastName)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.EWPUser.LastName)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

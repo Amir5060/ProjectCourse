@@ -117,8 +117,14 @@ namespace ProjectCourse.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RMWorkoutID,RMID,WorkoutID,WorkoutWeight,Repetition,RMWorkoutDate,C1RM")] C1RMWorkout c1RMWorkout)
+        public ActionResult Edit([Bind(Include = "RMWorkoutID,RMID,WorkoutID,WorkoutWeight,Repetition,RMWorkoutDate,C1RM,RMPlanID")] C1RMWorkout c1RMWorkout)
         {
+            if (c1RMWorkout.WorkoutWeight == null && c1RMWorkout.Repetition == null)
+            {
+                c1RMWorkout = db.C1RMWorkout.Find(Convert.ToInt32(RouteData.Values["id"]));
+                ViewBag.Message = "You gotta fill in all the fields!";
+                return View(c1RMWorkout);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(c1RMWorkout).State = EntityState.Modified;

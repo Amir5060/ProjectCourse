@@ -40,46 +40,73 @@ namespace ProjectCourse.Controllers
             return View(plan);
         }
 
-        // GET: Plans/Create
+        //// GET: Plans/Create
+        //public ActionResult Create()
+        //{
+        //    Plan p = new Plan();
+        //    if (!p.HaveUnfinishedPlan(User.Identity.GetUserId()))
+        //    {
+        //        ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
+        //        return View();
+        //    }
+        //    TempData["Message"] = "You can't create new plan because you have an active plan.";
+        //    return RedirectToAction("Index");
+        //}
+
+        //// POST: Plans/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "PlanID,UserID,Microcycle,WorkoutTime,PlanDate")] Plan plan)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //If user still hasn't filled up his personal info
+        //        string myUserID = User.Identity.GetUserId();
+        //        if (db.EWPUsers.Where(p => p.UserID == myUserID).Count() == 0)
+        //        {
+        //            ViewBag.Color = "Red";
+        //            ViewBag.Message = "Please fill the User Info page first.";
+        //            return View();
+        //        }
+        //        plan.UserID = User.Identity.GetUserId();
+        //        if (plan.PlanDate == null)
+        //            plan.PlanDate = DateTime.Now;
+        //        db.Plans.Add(plan);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName", plan.UserID);
+        //    return View(plan);
+        //}
+
+        // Plans/Create
         public ActionResult Create()
         {
-            Plan p = new Plan();
-            if (!p.HaveUnfinishedPlan(User.Identity.GetUserId()))
+            //If user still hasn't filled up his personal info
+            string myUserID = User.Identity.GetUserId();
+            if (db.EWPUsers.Where(p => p.UserID == myUserID).Count() == 0)
             {
-                ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
-                return View();
+                //ViewBag.Color = "Red";
+                //ViewBag.Message = "Please fill the User Info page first.";
+                //return View();
+                TempData["Message"] = "Please fill the User Info page first.";
+                return RedirectToAction("Index");
             }
-            TempData["Message"] = "You can't create new plan because you have an active plan.";
-            return RedirectToAction("Index");
-        }
-
-        // POST: Plans/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PlanID,UserID,Microcycle,WorkoutTime,PlanDate")] Plan plan)
-        {
-            if (ModelState.IsValid)
+            Plan plan = new Plan();
+            if (!plan.HaveUnfinishedPlan(User.Identity.GetUserId()))
             {
-                //If user still hasn't filled up his personal info
-                string myUserID = User.Identity.GetUserId();
-                if (db.EWPUsers.Where(p => p.UserID == myUserID).Count() == 0)
-                {
-                    ViewBag.Color = "Red";
-                    ViewBag.Message = "Please fill the User Info page first.";
-                    return View();
-                }
                 plan.UserID = User.Identity.GetUserId();
-                if (plan.PlanDate == null)
-                    plan.PlanDate = DateTime.Now;
+                plan.PlanDate = DateTime.Now;
                 db.Plans.Add(plan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName", plan.UserID);
-            return View(plan);
+            TempData["Message"] = "You can't create new plan because you have an active plan.";
+            return RedirectToAction("Index");
         }
 
         // GET: Plans/Edit/5

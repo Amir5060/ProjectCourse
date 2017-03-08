@@ -14,7 +14,8 @@ namespace ProjectCourse.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class aspnetEntities : DbContext
     {
         public aspnetEntities()
@@ -45,7 +46,9 @@ namespace ProjectCourse.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllSports_Result>("GetAllSports");
         }
-    
+
+        
+
         public virtual ObjectResult<GetUserByUserID_Result> GetUserByUserID(string userID)
         {
             var userIDParameter = userID != null ?

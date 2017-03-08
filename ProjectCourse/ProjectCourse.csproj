@@ -274,6 +274,7 @@
     </Compile>
     <Compile Include="Models\CheckAuthorize.cs" />
     <Compile Include="Models\Classes\C1RMWorkout.cs" />
+    <Compile Include="Models\Classes\C1RM.cs" />
     <Compile Include="Models\Classes\Plan.cs" />
     <Compile Include="Models\Classes\WorkoutPlan.cs" />
     <Compile Include="Models\EWPUser.cs">
@@ -354,6 +355,7 @@
       <DependentUpon>ASPModel.edmx</DependentUpon>
       <LastGenOutput>ASPModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ReleaseNotes.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -503,11 +505,6 @@
     <Content Include="Views\C1RMWorkout\Details.cshtml" />
     <Content Include="Views\C1RMWorkout\Edit.cshtml" />
     <Content Include="Views\C1RMWorkout\Index.cshtml" />
-    <Content Include="Views\Workouts\Create.cshtml" />
-    <Content Include="Views\Workouts\Delete.cshtml" />
-    <Content Include="Views\Workouts\Details.cshtml" />
-    <Content Include="Views\Workouts\Edit.cshtml" />
-    <Content Include="Views\Workouts\Index.cshtml" />
     <Content Include="Views\WorkoutMuscles\Create.cshtml" />
     <Content Include="Views\WorkoutMuscles\Delete.cshtml" />
     <Content Include="Views\WorkoutMuscles\Details.cshtml" />
@@ -526,6 +523,11 @@
     <Content Include="Views\Injuries\Index.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\_LogCreat.cshtml" />
+    <Content Include="Views\Workouts\Create.cshtml" />
+    <Content Include="Views\Workouts\Delete.cshtml" />
+    <Content Include="Views\Workouts\Details.cshtml" />
+    <Content Include="Views\Workouts\Edit.cshtml" />
+    <Content Include="Views\Workouts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

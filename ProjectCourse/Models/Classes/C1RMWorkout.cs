@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -106,6 +107,9 @@ namespace ProjectCourse.Models
                 }
             }
         }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public virtual DateTime Due { get; set; }
     }
 
     public class CompareClass

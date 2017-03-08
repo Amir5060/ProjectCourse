@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - EWP</title>
     @using Microsoft.AspNet.Identity
+    @using System.Linq
     @Styles.Render("~/Content/bootstrap.min.css")
     @Styles.Render("~/fonts/font-awesome/css/font-awesome.css")
     <!-- Gritter -->
@@ -40,7 +41,7 @@
                         <a href="~/Home/Contact"><i class="fa fa-envelope"></i> <span class="nav-label">Contact</span></a>
                     </li>
                     <li class="special_link">
-                        <a href="createworkout.html"><i class="fa fa-diamond"></i> <span class="nav-label">Create Workout</span> </a>
+                        <a href="~/Plans/"><i class="fa fa-diamond"></i> <span class="nav-label">Plans</span> </a>
                     </li>
 
                     @if (Request.IsAuthenticated)
@@ -49,7 +50,21 @@
                         object id = User.Identity.GetUserId();
                         if (!User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Plans", "Index", "Plans")</li>
+                            var myEntity = new ProjectCourse.Models.aspnetEntities();
+                            var v = (from p in myEntity.Plans
+                                     where p.UserID == id.ToString()
+                                     select p).FirstOrDefault();
+                            if (v != null)
+                            {
+                                var WorkoutCount = (from w in myEntity.WorkoutPlans
+                                                    where w.PlanID == v.PlanID
+                                                    select w).Count();
+
+                                if (WorkoutCount > 0)
+                                {
+                                <li>@Html.ActionLink("Current Plan", "Index", "WorkoutPlans")</li>
+                                }
+                            }
                             <li>@Html.ActionLink("Injuries", "Index", "Injuries")</li>
                         }
                         if (User.IsInRole("Admin"))

@@ -9,17 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<p>
+<p style="color:red;">
     @TempData["Message"]
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Microcycle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.WorkoutTime)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.PlanDate)
         </th>
@@ -28,21 +28,21 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Microcycle)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.WorkoutTime)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.PlanDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlanID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PlanID }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.PlanID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PlanID }) |*@
             @Html.ActionLink("Workout list", "../WorkoutPlans") |
-            @Html.ActionLink("1 RM list", "../C1RM") 
+            @Html.ActionLink("1 RM list", "../C1RM") |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PlanID })
         </td>
     </tr>
 }

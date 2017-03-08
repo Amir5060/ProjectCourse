@@ -6,6 +6,9 @@
 
 <h2>Index</h2>
 
+<p style="color:red;">
+    @TempData["Message"]
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -29,9 +32,10 @@
             @Html.DisplayFor(modelItem => item.RMDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RMID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RMID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RMID })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.RMID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RMID }) |*@
+            @Html.ActionLink("1RM Workouts List", "../C1RMWorkout")
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.RMID })*@
         </td>
     </tr>
 }

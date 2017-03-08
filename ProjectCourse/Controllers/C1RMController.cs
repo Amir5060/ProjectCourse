@@ -17,7 +17,6 @@ namespace ProjectCourse.Controllers
         private aspnetEntities db = new aspnetEntities();
 
         // GET: C1RM
-        
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -43,8 +42,16 @@ namespace ProjectCourse.Controllers
         // GET: C1RM/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
-            return View();
+            //C1RM c1rm = new C1RM();
+            //if (!c1rm.HaveAlreadyWeight(User.Identity.GetUserId()))
+            //{
+                ViewBag.UserID = new SelectList(db.EWPUsers, "UserID", "FirstName");
+                return View();
+            //}
+
+            //TempData["Message"] = "You can't add a new weight because you've already done that.";
+            //return RedirectToAction("Index");
+            
         }
 
         // POST: C1RM/Create
@@ -52,11 +59,12 @@ namespace ProjectCourse.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RMID,UserID,UserWeight,RMDate")] C1RM c1RM)
+        public ActionResult Create([Bind(Include = "RMID,UserID,UserWeight")] C1RM c1RM)
         {
             if (ModelState.IsValid)
             {
                 c1RM.UserID = User.Identity.GetUserId();
+                c1RM.RMDate = DateTime.Now.Date;
                 db.C1RM.Add(c1RM);
                 db.SaveChanges();
                 return RedirectToAction("Index");
