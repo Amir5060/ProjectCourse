@@ -64,7 +64,6 @@ namespace ProjectCourse.Controllers
                     {
                         c1RMWorkout = new Models.C1RMWorkout();
                         c1RMWorkout.RMID = rmID;
-                        c1RMWorkout.RMWorkoutDate = DateTime.Now.Date;
                         c1RMWorkout.WorkoutID = workoutID[i];
                         c1RMWorkout.RMPlanId = userPlan.PlanID;
                         db.C1RMWorkout.Add(c1RMWorkout);
@@ -81,10 +80,11 @@ namespace ProjectCourse.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RMWorkoutID,RMID,WorkoutID,WorkoutWeight,Repetition,RMWorkoutDate,C1RM")] C1RMWorkout c1RMWorkout)
+        public ActionResult Create([Bind(Include = "RMWorkoutID,RMID,WorkoutID,WorkoutWeight,Repetition,C1RM")] C1RMWorkout c1RMWorkout)
         {
             if (ModelState.IsValid)
             {
+                c1RMWorkout.RMWorkoutDate = DateTime.Now.Date;
                 db.C1RMWorkout.Add(c1RMWorkout);
                 db.SaveChanges();
                 return RedirectToAction("Index");
